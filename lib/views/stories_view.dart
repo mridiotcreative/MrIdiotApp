@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:mr_idiot_app/views/reel_view.dart';
 
 class StoryView extends StatefulWidget {
   const StoryView({Key? key}) : super(key: key);
@@ -145,26 +146,34 @@ class _StoryViewState extends State<StoryView> {
                                         )
                                     ),
                                   )
-                                      :Container(
-                                      margin: const EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: const Color(0xff322F2F),
-                                          image: DecorationImage(
-                                            image: AssetImage(storyImage[index]),
-                                            fit: BoxFit.fill,
-                                          )
-                                      ),
-                                      height: MediaQuery.of(context).size.height*0.2,
-                                      width: MediaQuery.of(context).size.width*0.2,
-                                      child: const Center(
-                                          child: Icon(
-                                            Icons.play_circle_outline_sharp,
-                                            color: Colors.white,
-                                            size: 30,
-                                          )
-                                      )
-                                  );
+                                      :InkWell(
+                                        onTap: (){
+                                          setState(() {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ReelView()));
+                                            //Navigator.push(context, MaterialPageRoute(builder: (context)=>ShortsScreen()));
+                                          });
+                                        },
+                                        child: Container(
+                                        margin: const EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                            color: const Color(0xff322F2F),
+                                            image: DecorationImage(
+                                              image: AssetImage(storyImage[index]),
+                                              fit: BoxFit.fill,
+                                            )
+                                        ),
+                                        height: MediaQuery.of(context).size.height*0.2,
+                                        width: MediaQuery.of(context).size.width*0.2,
+                                        child: const Center(
+                                            child: Icon(
+                                              Icons.play_circle_outline_sharp,
+                                              color: Colors.white,
+                                              size: 30,
+                                            )
+                                        )
+                                  ),
+                                      );
                                 },
                               ),
                             ),
