@@ -16,7 +16,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       appBar: AppBar(
         //backgroundColor: Colors.red,
         backgroundColor: Color(0xffD2D4DA),
@@ -220,34 +220,4 @@ class _HomeViewState extends State<HomeView> {
       // ),
     );
   }
-}
-class PaintTriangle extends CustomPainter {
-  final Color backgroundColor;
-
-  PaintTriangle({
-    required this.backgroundColor,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final y = size.height-50;
-    final x = size.width;
-
-    final paint = Paint()
-      ..color = backgroundColor;
-    final path = Path();
-
-    path
-      ..moveTo(0, y)
-      ..lineTo((x / 2), (y / 1.2))..lineTo(x, y);
-
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
-
 }

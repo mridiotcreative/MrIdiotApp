@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:mr_idiot_app/views/photopost_view.dart';
 import 'package:mr_idiot_app/views/reel_view.dart';
 
 class StoryView extends StatefulWidget {
@@ -111,7 +112,7 @@ class _StoryViewState extends State<StoryView> {
             return NotificationListener<ScrollNotification>(
               onNotification: _scrollListener,
               child: Scaffold(
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.black,
                 //               backgroundColor: Colors.red,
                 body: SafeArea(
                   child: Stack(
@@ -134,15 +135,20 @@ class _StoryViewState extends State<StoryView> {
                                     margin: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: Color(0xff322F2F),
+                                      border: Border.all(
+                                        color: Colors.yellow,
+                                        width: 2
+                                      ),
+                                      // color: Color(0xff322F2F),
+                                      color: Colors.grey
                                     ),
                                     height: MediaQuery.of(context).size.height*0.2,
                                     width: MediaQuery.of(context).size.width*0.2,
                                     child: const Center(
                                         child: Icon(
                                           Icons.add,
-                                          color: Colors.white,
-                                          size: 30,
+                                          color: Colors.black,
+                                          size: 40,
                                         )
                                     ),
                                   )
@@ -157,6 +163,10 @@ class _StoryViewState extends State<StoryView> {
                                         margin: const EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(10),
+                                            border: Border.all(
+                                                color: Colors.white,
+                                                width: 2
+                                            ),
                                             color: const Color(0xff322F2F),
                                             image: DecorationImage(
                                               image: AssetImage(storyImage[index]),
@@ -194,15 +204,20 @@ class _StoryViewState extends State<StoryView> {
                                       Container(
                                           margin: const EdgeInsets.only(left:7,top:10,right:7,bottom: 2),
                                           decoration: BoxDecoration(
-                                            //color: Colors.green,
-                                            color: Colors.transparent,
-                                            borderRadius: BorderRadius.circular(10),
+                                            border: Border.all(
+                                                color: Colors.white,
+                                                width: 2
+                                            ),
+                                            borderRadius: BorderRadius.circular(100),
                                           ),
                                           height: MediaQuery.of(context).size.height*0.08,
-                                          width: MediaQuery.of(context).size.width*0.18,
-                                          child: Image.asset(
-                                            filterImage[index],
-                                            fit: BoxFit.fill,
+                                          width: MediaQuery.of(context).size.width*0.17,
+                                          child: ClipRRect(
+                                            child: Image.asset(
+                                              filterImage[index],
+                                              fit: BoxFit.fill,
+                                            ),
+                                            borderRadius: BorderRadius.circular(100),
                                           )
                                       ),
                                       Text(
@@ -212,7 +227,8 @@ class _StoryViewState extends State<StoryView> {
                                         style: const TextStyle(
                                             fontFamily: "YesevaOne",
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 12
+                                            fontSize: 12,
+                                            color: Colors.white
                                         ),
                                       )
                                     ],
@@ -234,117 +250,82 @@ class _StoryViewState extends State<StoryView> {
                                 crossAxisSpacing: 5,
                                 itemCount: postImage.length,
                                 itemBuilder: (context, index) {
-                                  return Stack(
-                                    children: [
-                                      Container(
-                                        width: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width,
-                                        decoration: const BoxDecoration(
-                                          color: Colors.transparent,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(15)),
-                                        ),
-                                        child: ClipRRect(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(2)),
-                                          child: Image.asset(postImage[index], fit: BoxFit.cover,),
-                                        ),
+                                  return InkWell(
+                                    onTap: (){
+                                      setState(() {
+                                        Navigator.push(context, MaterialPageRoute(builder: (builder)=> PhotoPodtView()));
+                                      });
+                                    },
+                                    child: Container(
+                                      width: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .width,
+                                      decoration: const BoxDecoration(
+                                        color: Colors.transparent,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15)),
                                       ),
-                                      // Positioned(
-                                      //   left: MediaQuery.of(context).size.width * 0.02,
-                                      //   bottom: MediaQuery.of(context).size.height * 0.009,
-                                      //   child: globalTextTitle(name[index], 15, Global().colorWhite)
-                                      //   )
-                                    ],
+                                      child: ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(2)),
+                                        child: Image.asset(postImage[index], fit: BoxFit.cover,),
+                                      ),
+                                    ),
                                   );
                                 },
                               ),
                             ),
-                            // Container(
-                            //   height: MediaQuery.of(context).size.height,
-                            //   child: MasonryGridView.count(
-                            //     physics: NeverScrollableScrollPhysics(),
-                            //     padding: const EdgeInsets.all(10),
-                            //     crossAxisCount: 2,
-                            //     mainAxisSpacing: 5,
-                            //     crossAxisSpacing: 5,
-                            //     itemCount: postImage.length,
-                            //     itemBuilder: (context, index) {
-                            //       return Stack(
-                            //         children: [
-                            //           Container(
-                            //             width: MediaQuery
-                            //                 .of(context)
-                            //                 .size
-                            //                 .width,
-                            //             decoration: const BoxDecoration(
-                            //               color: Colors.transparent,
-                            //               borderRadius: BorderRadius.all(
-                            //                   Radius.circular(15)),
-                            //             ),
-                            //             child: ClipRRect(
-                            //               borderRadius: const BorderRadius.all(
-                            //                   Radius.circular(2)),
-                            //               child: Image.asset(postImage[index], fit: BoxFit.cover,),
-                            //             ),
-                            //           ),
-                            //           // Positioned(
-                            //           //   left: MediaQuery.of(context).size.width * 0.02,
-                            //           //   bottom: MediaQuery.of(context).size.height * 0.009,
-                            //           //   child: globalTextTitle(name[index], 15, Global().colorWhite)
-                            //           //   )
-                            //         ],
-                            //       );
-                            //     },
-                            //   ),
-//                            )
                           ],
                         ),
                       ),
                       ///FilterView
                       filterHide ?
                       Container()
-                          :Container(
-                        color: Colors.white,
-                        //color: Colors.brown,
-                        height: MediaQuery.of(context).size.height*0.12,
-                        child:
-                        ListView.builder(
-                          itemCount: filterImage.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context,index){
-                            return Column(
-                              children: [
-                                Container(
-                                    margin: const EdgeInsets.only(left:7,top:10,right:7,bottom: 2),
-                                    decoration: BoxDecoration(
-                                      //color: Colors.green,
-                                      color: Colors.transparent,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    height: MediaQuery.of(context).size.height*0.08,
-                                    width: MediaQuery.of(context).size.width*0.18,
-                                    child: Image.asset(
-                                      filterImage[index],
-                                      fit: BoxFit.fill,
-                                    )
-                                ),
-                                Text(
-                                  filterText[index],
-                                  textAlign: TextAlign.center,
-                                  maxLines: 1,
-                                  style: const TextStyle(
-                                      fontFamily: "YesevaOne",
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12
+                        :Container(
+                          color: Colors.black,
+                          //color: Colors.brown,
+                          height: MediaQuery.of(context).size.height*0.12,
+                          child: ListView.builder(
+                            itemCount: filterImage.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context,index){
+                              return Column(
+                                children: [
+                                  Container(
+                                      margin: const EdgeInsets.only(left:7,top:10,right:7,bottom: 2),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.white,
+                                          width: 2
+                                        ),
+                                        borderRadius: BorderRadius.circular(100),
+                                      ),
+                                      height: MediaQuery.of(context).size.height*0.08,
+                                      width: MediaQuery.of(context).size.width*0.17,
+                                      child: ClipRRect(
+                                        child: Image.asset(
+                                          filterImage[index],
+                                          fit: BoxFit.fill,
+                                        ),
+                                        borderRadius: BorderRadius.circular(100),
+                                      )
                                   ),
-                                )
-                              ],
-                            );
-                          },
-                        ),
+                                  Text(
+                                    filterText[index],
+                                    textAlign: TextAlign.center,
+                                    maxLines: 1,
+                                    style: const TextStyle(
+                                        fontFamily: "YesevaOne",
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12,
+                                      color: Colors.white
+                                    ),
+                                  )
+                                ],
+                              );
+                            },
+                          ),
                       )
                     ],
                   ),

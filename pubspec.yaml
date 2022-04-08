@@ -45,6 +45,7 @@ flutter:
   #images#
   assets:
     - assets/
+    - assets/images/postimages/
     - assets/images/home/
     - assets/images/
 
