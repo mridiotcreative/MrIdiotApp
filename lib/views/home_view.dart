@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mr_idiot_app/views/stories_view.dart';
 
+import 'global_widget.dart';
+
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
 
@@ -14,7 +16,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       appBar: AppBar(
         //backgroundColor: Colors.red,
         backgroundColor: Color(0xffD2D4DA),
@@ -108,44 +110,45 @@ class _HomeViewState extends State<HomeView> {
       //   ),
       // )
       /// with image
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                    "assets/images/home/bottomyellow.png"
-                ),
-                fit: BoxFit.fill
-            ),
-            //color: Color(0xff28365A),
-            color:Colors.transparent
-        ),
-        padding: const EdgeInsets.only(top:10,bottom:10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const [
-            Icon(
-              Icons.home,
-              color: Colors.white,
-              size: 35,
-            ),
-            Icon(
-              Icons.add,
-              color: Colors.white,
-              size: 40,
-              //           size: 50,
-            ),
-            Icon(
-              Icons.shopping_cart,
-              color: Colors.white,
-              size: 35,
-            ),
-          ],
-        ),
-      ),
-      /// older one
       // bottomNavigationBar: Container(
+      //   decoration: const BoxDecoration(
+      //       image: DecorationImage(
+      //           image: AssetImage(
+      //               "assets/images/home/bottomyellow.png"
+      //           ),
+      //           fit: BoxFit.fill
+      //       ),
+      //       //color: Color(0xff28365A),
+      //       color:Colors.transparent
+      //   ),
+      //   padding: const EdgeInsets.only(top:10,bottom:10),
+      //   child: Row(
+      //     crossAxisAlignment: CrossAxisAlignment.center,
+      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //     //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //     children: const [
+      //       Icon(
+      //         Icons.home,
+      //         color: Colors.white,
+      //         size: 35,
+      //       ),
+      //       Icon(
+      //         Icons.add,
+      //         color: Colors.white,
+      //         size: 40,
+      //         //           size: 50,
+      //       ),
+      //       Icon(
+      //         Icons.shopping_cart,
+      //         color: Colors.white,
+      //         size: 35,
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      /// older one
+      bottomNavigationBar: bottomBar(true)
+      // Container(
       //   padding: const EdgeInsets.only(top:10,bottom:10),
       //   color: Color(0xff28365A),
       //   child: Row(
@@ -217,34 +220,4 @@ class _HomeViewState extends State<HomeView> {
       // ),
     );
   }
-}
-class PaintTriangle extends CustomPainter {
-  final Color backgroundColor;
-
-  PaintTriangle({
-    required this.backgroundColor,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final y = size.height-50;
-    final x = size.width;
-
-    final paint = Paint()
-      ..color = backgroundColor;
-    final path = Path();
-
-    path
-      ..moveTo(0, y)
-      ..lineTo((x / 2), (y / 1.2))..lineTo(x, y);
-
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
-
 }
