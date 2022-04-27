@@ -89,11 +89,7 @@ class _ScreenOtpState extends State<ScreenOtp> {
             ),
             InkWell(
               onTap: (){
-                Navigator.push(
-                  context,
-                  //MaterialPageRoute(builder: (context) => const HomeView()),
-                  MaterialPageRoute(builder: (context) => const ProfileView()),
-                );
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeView()),);
               },
               child: Container(
                 margin: const EdgeInsets.only(top: 15),

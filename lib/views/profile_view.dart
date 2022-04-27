@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:mr_idiot_app/views/photopost_view.dart';
-import 'package:mr_idiot_app/views/stories_view.dart';
 
 import 'global_widget.dart';
 
@@ -55,7 +54,7 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.1),
+      backgroundColor: Colors.black,//Colors.white.withOpacity(0.1),
       appBar: AppBar(
         backgroundColor: Colors.black,
         automaticallyImplyLeading: false,
