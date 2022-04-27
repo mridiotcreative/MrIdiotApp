@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mr_idiot_app/views/profile_view.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 
@@ -88,10 +89,7 @@ class _ScreenOtpState extends State<ScreenOtp> {
             ),
             InkWell(
               onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomeView()),
-                );
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeView()),);
               },
               child: Container(
                 margin: const EdgeInsets.only(top: 15),

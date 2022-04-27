@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mr_idiot_app/views/profile_view.dart';
 import 'package:mr_idiot_app/views/stories_view.dart';
 
 import 'global_widget.dart';
@@ -79,11 +80,18 @@ class _HomeViewState extends State<HomeView> {
             iconSize: 35,
           ),
           const SizedBox(width: 10,),
-          ClipOval(
-            child: Image.asset(
-              "assets/images/home/profile.png",
-              height: 40,
-              width: 40,
+          InkWell(
+            onTap: (){
+              setState(() {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileView()),);
+              });
+            },
+            child: ClipOval(
+              child: Image.asset(
+                "assets/images/home/profile.png",
+                height: 40,
+                width: 40,
+              ),
             ),
           ),
           const SizedBox(width: 10,)
