@@ -13,6 +13,8 @@ class PhotoPodtView extends StatefulWidget {
 }
 
 class _PhotoPodtViewState extends State<PhotoPodtView> {
+  bool searchBarView = false;
+
   List<String> postImage = [
     "assets/images/home/p1.png",
     "assets/images/home/p2.png",
@@ -330,7 +332,7 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
                 right: 0,
                 child: AppBar(
                   shadowColor: Colors.transparent,
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: searchBarView ? Colors.black : Colors.transparent,
                   automaticallyImplyLeading: false,
                   leading: IconButton(
                     icon:const Icon(
@@ -341,6 +343,53 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
                       Navigator.pop(context);
                     },
                   ),
+                  title: searchBarView ? Container(
+                    margin: const EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(0),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          color: Colors.transparent,
+                          //color: Colors.red,
+                          child: const TextField(
+                            cursorColor: Colors.white,
+                            style: TextStyle(
+                              color: Colors.white
+                            ),
+                            decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              hintText: 'Search...',
+                              hintStyle: TextStyle(
+                                color: Colors.white
+                              ),
+                              prefixIcon: Icon(Icons.search,color: Colors.white,),
+                              //suffixIcon: Icon(Icons.camera_alt)
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 0),
+                          width: MediaQuery.of(context).size.width,
+                          height: 1,
+                          color: Colors.black,
+                        )
+                      ],
+                    ),
+                  ) : Container(),
+                  actions: [
+                    IconButton(
+                        onPressed: (){
+                          setState(() {
+                            searchBarView ? searchBarView =false: searchBarView = true;
+                          });
+                        },
+                        icon: Icon(
+                          searchBarView ? Icons.cancel : Icons.search,
+                          color: Colors.white,
+                        )
+                    )
+                  ],
                 )
             )
           ],
