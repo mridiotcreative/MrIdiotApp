@@ -346,7 +346,7 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
           ],
         ),
       ),
-      bottomNavigationBar: bottomBar(true)
+      bottomNavigationBar: bottomBar(true,context)
     );
   }
 }

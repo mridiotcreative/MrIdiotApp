@@ -476,7 +476,7 @@ class _ProfileViewState extends State<ProfileView> {
           ),
         ),
       ),
-      bottomNavigationBar: bottomBar(true)
+      bottomNavigationBar: bottomBar(true,context)
     );
   }
 }

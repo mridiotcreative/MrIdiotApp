@@ -155,7 +155,7 @@ class _HomeViewState extends State<HomeView> {
       //   ),
       // ),
       /// older one
-      bottomNavigationBar: bottomBar(true)
+      bottomNavigationBar: bottomBar(true,context)
       // Container(
       //   padding: const EdgeInsets.only(top:10,bottom:10),
       //   color: Color(0xff28365A),
