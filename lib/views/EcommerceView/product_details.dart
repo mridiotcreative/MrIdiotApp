@@ -9,6 +9,8 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
+  CarouselController buttonCarouselController = CarouselController();
+
   final ScrollController _controllerAxis = ScrollController();
   List<String> bicycleImage = [
     "assets/images/ecommerce/b1.png",
@@ -28,17 +30,7 @@ class _ProductDetailState extends State<ProductDetail> {
         child: Padding(
           padding: const EdgeInsets.only(top: 12.0),
           child: Row(
-            // mainAxisAlignment: MainAxisAlignment.start,
             children: const [
-              // Padding(
-              //   padding: EdgeInsets.only(top: 12.0),
-              //   child: Icon(Icons.arrow_back,size: 22,color: Colors.white,),
-              // ) ,
-              // Expanded(child: Text("Hello",style: TextStyle(color: Colors.white),)),
-              // Padding(
-              //   padding: EdgeInsets.only(top: 12.0),
-              //   child: Icon(Icons.more_vert_outlined,color: Color(0xffFFC909),),
-              // )
               Icon(Icons.arrow_back,size: 22,color: Colors.white,),
               Expanded(child: SizedBox()),
               Padding(
@@ -66,14 +58,9 @@ class _ProductDetailState extends State<ProductDetail> {
                       controller: _controllerAxis,
                       physics: const ClampingScrollPhysics(),
                       child:  CarouselSlider.builder(
+                        carouselController: buttonCarouselController,
                         itemCount: bicycleImage.length,
                         itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
-                          if(itemIndex==bicycleImage.length)
-                            {
-                              tempIndex=1;
-                            }else{
-                            tempIndex= itemIndex+1;
-                          }
                           return Container(
                             width: MediaQuery.of(context).size.width,
                             margin: const EdgeInsets.only(left: 10,right: 10),
@@ -84,14 +71,6 @@ class _ProductDetailState extends State<ProductDetail> {
                                     fit: BoxFit.contain
                                 )
                             ),
-                            // child: Container(
-                            //   width: 10,
-                            //     decoration: BoxDecoration(
-                            //       color: Colors.grey,
-                            //       borderRadius: BorderRadius.circular(40),
-                            //     ),
-                            //     child: Center(child: Text(itemIndex.toString())),
-                            // ),
                           );
                         },
                         options: CarouselOptions(
@@ -99,6 +78,12 @@ class _ProductDetailState extends State<ProductDetail> {
                           enableInfiniteScroll: true,
                           autoPlay: false,
                           viewportFraction: 1.0,
+                          onPageChanged: (val,re){
+                            debugPrint(val.toString());
+                            setState(() {
+                              tempIndex= val+1;
+                            });
+                          },
                           height: MediaQuery.of(context).size.height/2.0,
                         ),
                       ),
@@ -175,11 +160,10 @@ class _ProductDetailState extends State<ProductDetail> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 25.0,right: 20),
                     child: Row(
-                      //mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: const[
                         Expanded(child: Text("Delivery Details",style: TextStyle(fontSize: 19,fontWeight: FontWeight.bold),)),
-                        Text("Check deliver date",style: TextStyle(color: Colors.blueAccent,),),
+                        Text("Check deliver date",style: TextStyle(color: Color(0xff268cb8),),),
                       ],
                     ),
                   ),
@@ -198,11 +182,10 @@ class _ProductDetailState extends State<ProductDetail> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 25.0,right: 20,top: 5),
                     child: Row(
-                      //mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const[
                         Expanded(child: Text("Product Details",style: TextStyle(fontSize: 19,fontWeight: FontWeight.bold),)),
-                        Text("+ More",style: TextStyle(color: Colors.blueAccent,),),
+                        Text("+ More",style: TextStyle(color: Color(0xff268cb8),),),
                       ],
                     ),
                   ),
@@ -213,17 +196,12 @@ class _ProductDetailState extends State<ProductDetail> {
         ),
       ),
       bottomNavigationBar:  Container(
-        padding: EdgeInsets.only(top: 10),
-        margin: EdgeInsets.zero,
-        //color: Color(0xffFFC909),
         child: Row(
-          //crossAxisAlignment: CrossAxisAlignment.center,
-          //mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
             width: MediaQuery.of(context).size.width*0.5,
             height: MediaQuery.of(context).size.height*0.10,
-            color: Colors.blue,
+            color: Colors.white,
             child:Padding(
               padding: const EdgeInsets.only(right: 5.0),
               child: Row(
