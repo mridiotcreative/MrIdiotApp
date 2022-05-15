@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:mr_idiot_app/views/EcommerceView/product_details.dart';
 import '../global_widget.dart';
 import '../photopost_view.dart';
 import '../profile_view.dart';
@@ -292,7 +293,7 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                                     return InkWell(
                                       onTap: (){
                                         setState(() {
-                                          //Navigator.push(context, MaterialPageRoute(builder: (builder)=> PhotoPodtView()));
+                                          Navigator.push(context, MaterialPageRoute(builder: (builder)=> const ProductDetail()));
                                         });
                                       },
                                       child: Container(
