@@ -23,25 +23,34 @@ class _ProductDetailState extends State<ProductDetail> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff2D2D37),
       automaticallyImplyLeading: false,
       title: Container(
         color: Colors.transparent,
         child: Padding(
           padding: const EdgeInsets.only(top: 12.0),
           child: Row(
-            children: const [
-              Icon(Icons.arrow_back,size: 22,color: Colors.white,),
-              Expanded(child: SizedBox()),
-              Padding(
+            children: [
+              IconButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  size: 22,
+                  color: Colors.white,
+                )
+              ),
+              const Expanded(child: SizedBox()),
+              const Padding(
                 padding: EdgeInsets.only(right: 25.0),
                 child: Icon(Icons.shopping_cart,size: 22,color: Colors.white,),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(right: 25.0),
                 child: Icon(Icons.logout,size: 22,color: Colors.white,),
               ),
-              Icon(Icons.more_horiz_rounded,size: 22,color: Colors.white,),
+              const Icon(Icons.more_horiz_rounded,size: 22,color: Colors.white,),
             ],
           ),
         ),
