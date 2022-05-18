@@ -35,7 +35,7 @@ class _MySplashState extends State<MySplash> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(const Duration(seconds: 5),()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const MyHomePage(title: "Chat App",))));
+    Timer(const Duration(seconds: 4),()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const MyHomePage(title: "Chat App",))));
   }
 
   @override
