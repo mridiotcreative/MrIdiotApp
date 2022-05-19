@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mr_idiot_app/views/EcommerceView/ecommerce_home_view.dart';
+import 'package:mr_idiot_app/views/home_view.dart';
 
 Widget bottomBar(bool cart,BuildContext context){
   return Container(
@@ -12,22 +13,32 @@ Widget bottomBar(bool cart,BuildContext context){
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-       const Icon(
-          Icons.home,
-          color: Colors.black,
-          size: 40,
+        IconButton(
+          onPressed: (){
+            Navigator.pushAndRemoveUntil<dynamic>(context, MaterialPageRoute(builder: (BuildContext context)=>HomeView()), (route) => false);
+          },
+          icon: const Icon(
+            Icons.home,
+            color: Colors.black,
+            size: 40,
+          ),
         ),
-        const ImageIcon(
-          AssetImage("assets/images/add_icon.png",),
-          color: Colors.black,
-          size: 35, 
+        InkWell(
+          onTap: (){
+            popUP(context);
+          },
+          child: const ImageIcon(
+            AssetImage("assets/images/add_icon.png",),
+            color: Colors.black,
+            size: 35,
+          ),
         ),
         cart ?
         IconButton(
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (builder)=> EcommerceHomeView()));
+            Navigator.pushAndRemoveUntil<dynamic>(context, MaterialPageRoute(builder: (BuildContext context) => EcommerceHomeView()), (route) => false);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.shopping_cart,
             color: Colors.black,
             size: 40,
@@ -44,6 +55,45 @@ Widget bottomBar(bool cart,BuildContext context){
   );
 }
 
+void popUP(BuildContext context) {
+  showModalBottomSheet(
+    // isScrollControlled:false,
+    isDismissible: true,
+    context: context,
+    builder: (context) {
+      return SizedBox(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 25,
+                  right: 5,
+                  top: 10,
+                  bottom: 15),
+              child: IconButton(
+                iconSize: 32,
+                onPressed: () {},
+                icon: const Icon(Icons.camera_alt_outlined),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  right: 5, top: 10, bottom: 15),
+              child: IconButton(
+                iconSize: 32,
+                onPressed: () {},
+                icon: const Icon(Icons.image),
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
+
 ///ecommerce bottom bar
 
 Widget globalECommerceBottomBar(bool cart,BuildContext context){
@@ -54,10 +104,15 @@ Widget globalECommerceBottomBar(bool cart,BuildContext context){
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        const Icon(
-          Icons.home,
-          color: Colors.black,
-          size: 40,
+        IconButton(
+          onPressed: (){
+              Navigator.pushAndRemoveUntil<dynamic>(context, MaterialPageRoute(builder: (BuildContext context)=>HomeView()), (route) => false);
+          },
+          icon: const Icon(
+            Icons.home,
+            color: Colors.black,
+            size: 40,
+          ),
         ),
         const ImageIcon(
           AssetImage("assets/images/ecommerce/menuecommerce.png",),
@@ -67,15 +122,14 @@ Widget globalECommerceBottomBar(bool cart,BuildContext context){
         cart ?
         IconButton(
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (builder)=> EcommerceHomeView()));
+            Navigator.pushAndRemoveUntil<dynamic>(context, MaterialPageRoute(builder: (BuildContext context) => EcommerceHomeView()), (route) => false);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.shopping_cart,
             color: Colors.black,
             size: 40,
           ),
-        )
-            :
+        ) :
         const ImageIcon(
           AssetImage("assets/images/forward_icon.png"),
           size: 40,
