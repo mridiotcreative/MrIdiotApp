@@ -17,40 +17,53 @@ class _ProductDetailState extends State<ProductDetail> {
     "assets/images/ecommerce/b2.png",
     "assets/images/ecommerce/b3.png",
   ];
-  int tempIndex=0;
+  int tempIndex=1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
       backgroundColor: Color(0xff2D2D37),
-      automaticallyImplyLeading: false,
+      automaticallyImplyLeading: true,
+      leading:IconButton(
+          padding: EdgeInsets.zero,
+          onPressed: (){
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            size: 22,
+            color: Colors.white,
+          )
+      ),
       title: Container(
         color: Colors.transparent,
         child: Padding(
-          padding: const EdgeInsets.only(top: 12.0),
+          padding: const EdgeInsets.only(left: 0,top: 12.0),
           child: Row(
-            children: [
-              IconButton(
-                onPressed: (){
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.arrow_back,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: const [
+              Expanded(child: SizedBox()),
+              Padding(
+                padding: EdgeInsets.only(right: 25.0),
+                child: ImageIcon(
+                  AssetImage("assets/images/ecommerce/carticon.png",),
+                  size: 25,
+                  color: Colors.white,
+                )
+                //Icon(Icons.shopping_cart,size: 22,color: Colors.white,),
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 25.0),
+                child: ImageIcon(
+                  AssetImage("assets/images/ecommerce/uploadicon.png",),
                   size: 22,
                   color: Colors.white,
                 )
+                //Icon(Icons.logout,size: 22,color: Colors.white,),
               ),
-              const Expanded(child: SizedBox()),
-              const Padding(
-                padding: EdgeInsets.only(right: 25.0),
-                child: Icon(Icons.shopping_cart,size: 22,color: Colors.white,),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(right: 25.0),
-                child: Icon(Icons.logout,size: 22,color: Colors.white,),
-              ),
-              const Icon(Icons.more_horiz_rounded,size: 22,color: Colors.white,),
+              Icon(Icons.more_horiz_rounded,size: 22,color: Colors.white,),
             ],
           ),
         ),
