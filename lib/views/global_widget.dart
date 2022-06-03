@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mr_idiot_app/views/EcommerceView/ecommerce_home_view.dart';
 import 'package:mr_idiot_app/views/home_view.dart';
-
+import 'package:mr_idiot_app/views/review_image_view.dart';
+XFile? imageFile,videoFile;
+ImagePicker picker = ImagePicker();
 Widget bottomBar(bool cart,BuildContext context){
   return Container(
     padding: const EdgeInsets.only(top:10,bottom:10),
     color: const Color(0xffC4C4C4),
-    ///color: Color(0xffFFC700),
-//    color: Color(0xff28365A),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -62,32 +63,68 @@ void popUP(BuildContext context) {
     context: context,
     builder: (context) {
       return SizedBox(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 25,
-                  right: 5,
-                  top: 10,
-                  bottom: 15),
-              child: IconButton(
-                iconSize: 32,
-                onPressed: () {},
-                icon: const Icon(Icons.camera_alt_outlined),
+        child: SingleChildScrollView(
+          child: ListBody(
+            children: [
+              ListTile(
+                onTap: (){
+                  selectedImage(context,ImageSource.camera);
+                },
+                title: const Text(
+                  "Upload Photo from Camera",style: TextStyle(
+                    fontWeight: FontWeight.bold
+                ),
+                  maxLines: 1,
+                ),
+                leading: const Icon(Icons.camera,color: Colors.black,),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  right: 5, top: 10, bottom: 15),
-              child: IconButton(
-                iconSize: 32,
-                onPressed: () {},
-                icon: const Icon(Icons.image),
+              ListTile(
+                onTap: (){
+                  selectedImage(context,ImageSource.gallery);
+                },
+                title: const Text(
+                  "Upload Photo From Gallery",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold
+                  ),
+                  maxLines: 1,
+                ),
+                leading: const Icon(Icons.photo_library,color: Colors.black,),
               ),
-            ),
-          ],
+              ListTile(
+                onTap: (){
+                  selectedVideo(context,ImageSource.camera);
+                },
+                title: const Text(
+                  "Upload Video From Camera",style: TextStyle(
+                    fontWeight: FontWeight.bold
+                ),
+                  maxLines: 1,
+                ),
+                leading: const Icon(Icons.videocam_sharp,color: Colors.black,),
+              ),
+              ListTile(
+                onTap: (){
+                  selectedVideo(context,ImageSource.gallery);
+                },
+                title: const Text("Upload Video From Gallery",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+                leading: const Icon(Icons.video_collection_outlined,color: Colors.black,),
+              ),
+              ListTile(
+                onTap: (){
+                  Navigator.pop(context);
+                },
+                title: const Text("Cancel",style: TextStyle(
+                    fontWeight: FontWeight.bold
+                ),),
+                leading: const Icon(Icons.cancel_outlined,color: Colors.black,),
+              ),
+            ],
+          ),
         ),
       );
     },
@@ -138,4 +175,45 @@ Widget globalECommerceBottomBar(bool cart,BuildContext context){
       ],
     ),
   );
+}
+///Upload Image
+selectedImage(BuildContext context,ImageSource imageSource) async {
+  try{
+    imageFile = null;
+    var pickedFile = await picker.pickImage(source: imageSource);
+    if (pickedFile != null) {
+      imageFile = pickedFile;
+      Navigator.push(context, MaterialPageRoute(builder: (builder) => ReviewImageView(pickedFile,true))).then((v) {
+        if(v == true){
+          debugPrint("success uploaded");
+        }else{
+          debugPrint("facing issue with uploading");
+        }
+        Navigator.pop(context);
+      });
+    }
+  }catch(e){
+    debugPrint(e.toString());
+  }
+}
+
+///Upload Video
+selectedVideo(BuildContext context,ImageSource imageSource) async {
+  try{
+    videoFile=null;
+    var pickedFile = await picker.pickVideo(source: imageSource);
+    if (pickedFile != null) {
+      videoFile = pickedFile;
+      Navigator.push(context, MaterialPageRoute(builder: (builder) => ReviewImageView(pickedFile,false))).then((v) {
+        if(v == true){
+          debugPrint("success uploaded");
+        }else{
+          debugPrint("facing issue with uploading");
+        }
+        Navigator.pop(context);
+      });
+    }
+  }catch(e){
+    debugPrint(e.toString());
+  }
 }

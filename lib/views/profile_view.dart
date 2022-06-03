@@ -448,7 +448,7 @@ class _ProfileViewState extends State<ProfileView> {
                      return InkWell(
                        onTap: (){
                          setState(() {
-                           Navigator.push(context, MaterialPageRoute(builder: (builder)=> const PhotoPodtView()));
+                          // Navigator.push(context, MaterialPageRoute(builder: (builder)=> const PhotoPodtView()));
                          });
                        },
                        child: Container(

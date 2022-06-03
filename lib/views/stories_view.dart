@@ -1,8 +1,14 @@
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mr_idiot_app/viewModels/ReviewImageViewModel.dart';
 import 'package:mr_idiot_app/views/photopost_view.dart';
 import 'package:mr_idiot_app/views/reel_view.dart';
+import 'package:mr_idiot_app/views/review_image_view.dart';
+import 'package:path_provider/path_provider.dart';
+import '../Models/view_post_models.dart';
 
 class StoryView extends StatefulWidget {
   const StoryView({Key? key}) : super(key: key);
@@ -69,39 +75,43 @@ class _StoryViewState extends State<StoryView> {
     "assets/images/home/p4.png",
     "assets/images/home/p4.png",
   ];
-  bool filterHide = true;
+  bool filterHide = true,isLoading = false;
   String? pos;
-  futureBuilderChages() async {
+  XFile? imageFile,videoFile;
+  ImagePicker picker = ImagePicker();
+  ViewPostsModel? viewPostsModel;
+  String? _tempDir;
+  String? temp2,temp13;
+  futureBuilderChages() async {}
+  PostData() async {
+    setState(() {
+      getTemporaryDirectory().then((d) => _tempDir = d.path);
+      isLoading = true;
+    });
     print("future");
-    // setState(() {
-    //   pos = _controllerAxis.position.toString();
-    //   if(_controllerAxis.offset >= 155.0){
-    //     filterHide = false;
-    //   }else{
-    //     filterHide = true;
-    //   }
-    //   // if(_controllerAxis.offset >= 231.0){
-    //   //   filterHide= false;
-    //   // }else{
-    //   //   filterHide= true;
-    //   // }
-    // });
+    viewPostsModel = await ReviewImageViewModel().fetchPost();
+    // temp2 = await thumnail(viewPostsModel!.result![3].uploadUrl!);
+    setState(() {
+      isLoading = false;
+    });
   }
   bool _scrollListener(ScrollNotification scrollInfo) {
     setState(() {
       pos = _controllerAxis.position.toString();
       if(_controllerAxis.offset >= 155.0){
         filterHide = false;
-      }else{
+      }
+      else{
         filterHide = true;
       }
-      // if(_controllerAxis.offset >= 231.0){
-      //   filterHide= false;
-      // }else{
-      //   filterHide= true;
-      // }
     });
     return true;
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    PostData();
   }
   @override
   Widget build(BuildContext context) {
@@ -113,7 +123,6 @@ class _StoryViewState extends State<StoryView> {
               onNotification: _scrollListener,
               child: Scaffold(
                 backgroundColor: Colors.black,
-                //               backgroundColor: Colors.red,
                 body: SafeArea(
                   child: Stack(
                     children: [
@@ -123,7 +132,7 @@ class _StoryViewState extends State<StoryView> {
                         child: Column(
                           children: [
                             /// Story View
-                            Container(
+                            SizedBox(
                               height: MediaQuery.of(context).size.height*0.20,
                               child:
                               ListView.builder(
@@ -131,59 +140,62 @@ class _StoryViewState extends State<StoryView> {
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context,index){
                                   return index == 0?
-                                  Container(
-                                    margin: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                        color: Colors.yellow,
-                                        width: 2
+                                  InkWell(
+                                    onTap: (){
+                                      popUP(context);
+                                    },
+                                    child: Container(
+                                      margin: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                          color: Colors.yellow,
+                                          width: 2
+                                        ),
+                                        color: Colors.grey
                                       ),
-                                      // color: Color(0xff322F2F),
-                                      color: Colors.grey
-                                    ),
-                                    height: MediaQuery.of(context).size.height*0.2,
-                                    width: MediaQuery.of(context).size.width*0.2,
-                                    child: const Center(
+                                      height: MediaQuery.of(context).size.height*0.2,
+                                      width: MediaQuery.of(context).size.width*0.2,
+                                      child: const Center(
                                         child: Icon(
                                           Icons.add,
                                           color: Colors.black,
                                           size: 40,
                                         )
+                                      ),
                                     ),
                                   )
-                                      :InkWell(
-                                        onTap: (){
-                                          setState(() {
-                                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ReelView()));
-                                            //Navigator.push(context, MaterialPageRoute(builder: (context)=>ShortsScreen()));
-                                          });
-                                        },
-                                        child: Container(
+                                  :InkWell(
+                                      onTap: (){
+                                        setState(() {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => ReelView()));
+                                        });
+                                      },
+                                      child: Container(
                                         margin: const EdgeInsets.all(10),
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
-                                            border: Border.all(
-                                                color: Colors.white,
-                                                width: 2
-                                            ),
-                                            color: const Color(0xff322F2F),
-                                            image: DecorationImage(
-                                              image: AssetImage(storyImage[index]),
-                                              fit: BoxFit.fill,
-                                            )
+                                          borderRadius: BorderRadius.circular(10),
+                                          border: Border.all(
+                                              color: Colors.white,
+                                              width: 2
+                                          ),
+                                          color: const Color(0xff322F2F),
+                                          image: DecorationImage(
+                                            image: AssetImage(storyImage[index]),
+                                            fit: BoxFit.fill,
+                                          )
                                         ),
                                         height: MediaQuery.of(context).size.height*0.2,
                                         width: MediaQuery.of(context).size.width*0.2,
                                         child: const Center(
-                                            child: Icon(
-                                              Icons.play_circle_outline_sharp,
-                                              color: Colors.white,
-                                              size: 30,
-                                            )
+                                          child: Icon(
+                                            Icons.play_circle_outline_sharp,
+                                            color: Colors.white,
+                                            size: 30,
+                                          )
                                         )
-                                  ),
-                                      );
+                                    ),
+                                  );
                                 },
                               ),
                             ),
@@ -191,7 +203,6 @@ class _StoryViewState extends State<StoryView> {
                             filterHide ? /// FilterView
                             Container(
                               color: Colors.transparent,
-                              //color: Colors.brown,
                               height: MediaQuery.of(context).size.height*0.12,
                               width: MediaQuery.of(context).size.width,
                               child:
@@ -240,41 +251,65 @@ class _StoryViewState extends State<StoryView> {
                               height: MediaQuery.of(context).size.height*0.12,
                             ),
                             /// Story View
-                            Container(
+                            SizedBox(
                               height: postImage.length*100,
-                              child: MasonryGridView.count(
-                                physics: NeverScrollableScrollPhysics(),
+                              child: isLoading == true ?
+                              const Center(
+                                  child: CircularProgressIndicator(color: Colors.white,),
+                              )
+                              : (viewPostsModel != null && viewPostsModel!.result!.length >0)
+                              ?MasonryGridView.count(
+                                physics: const NeverScrollableScrollPhysics(),
                                 padding: const EdgeInsets.all(10),
                                 crossAxisCount: 2,
                                 mainAxisSpacing: 5,
                                 crossAxisSpacing: 5,
-                                itemCount: postImage.length,
+                                itemCount: viewPostsModel!.result!.length,
                                 itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: (){
-                                      setState(() {
-                                        Navigator.push(context, MaterialPageRoute(builder: (builder)=> PhotoPodtView()));
-                                      });
-                                    },
-                                    child: Container(
-                                      width: MediaQuery
-                                          .of(context)
-                                          .size
-                                          .width,
-                                      decoration: const BoxDecoration(
-                                        color: Colors.transparent,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(15)),
+                                    return InkWell(
+                                      onTap: (){
+                                        setState(() {
+                                          Navigator.push(context, MaterialPageRoute(builder: (builder)=> PhotoPodtView(viewPostsModel!.result![index])));
+                                        });
+                                      },
+                                      child: Stack(
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context).size.width,
+                                            decoration: const BoxDecoration(
+                                              color: Colors.transparent,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(15)),
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius: const BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              child: Image.network(
+                                                viewPostsModel!.result![index].thumbnailImage ?? viewPostsModel!.result![index].uploadUrl ?? "https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg",
+                                                fit: BoxFit.cover,
+                                                errorBuilder: (ctx, o, n) {
+                                                  return Icon(Icons.error,color: Colors.white,);
+                                                },
+                                              )
+                                                    // : Container()
+                                            ),
+                                          ),
+                                      viewPostsModel!.result![index].videoCategoryType=="1" && viewPostsModel!.result![index].thumbnailImage != null?
+                                        const Positioned(
+                                            left:0,
+                                              right:0,
+                                              top:0,
+                                              bottom:0,
+                                              child: Icon(Icons.play_circle_filled_outlined,size: 50,color: Colors.white,)
+                                          )
+                                          :Container()
+                                        ],
                                       ),
-                                      child: ClipRRect(
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(2)),
-                                        child: Image.asset(postImage[index], fit: BoxFit.cover,),
-                                      ),
-                                    ),
-                                  );
+                                    );
                                 },
-                              ),
+                              )
+                              : const Text("No Data Found",
+                              style: TextStyle(color: Colors.white),),
                             ),
                           ],
                         ),
@@ -284,7 +319,6 @@ class _StoryViewState extends State<StoryView> {
                       Container()
                         :Container(
                           color: Colors.black,
-                          //color: Colors.brown,
                           height: MediaQuery.of(context).size.height*0.12,
                           child: ListView.builder(
                             itemCount: filterImage.length,
@@ -335,4 +369,169 @@ class _StoryViewState extends State<StoryView> {
           });
     });
   }
+
+  void popUP(BuildContext context) {
+    showModalBottomSheet(
+      isDismissible: true,
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          // child: Row(
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: [
+          //     Padding(
+          //       padding: const EdgeInsets.only(
+          //           left: 25,
+          //           right: 5,
+          //           top: 10,
+          //           bottom: 15),
+          //       child: IconButton(
+          //         iconSize: 32,
+          //         onPressed: () {
+          //           ///upload image video from camera
+          //         },
+          //         icon: const Icon(Icons.camera_alt_outlined),
+          //       ),
+          //     ),
+          //     Padding(
+          //       padding: const EdgeInsets.only(
+          //           right: 5, top: 10, bottom: 15),
+          //       child: IconButton(
+          //         iconSize: 32,
+          //         onPressed: () {
+          //           ///upload image video from gellary
+          //           selectedVideoImage();
+          //         },
+          //         icon: const Icon(Icons.image),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          child: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                ListTile(
+                  onTap: (){
+                    selectedImage(ImageSource.camera);
+                  },
+                  title: const Text(
+                    "Upload Photo from Camera",style: TextStyle(
+                    fontWeight: FontWeight.bold
+                    ),
+                    maxLines: 1,
+                  ),
+                  leading: const Icon(Icons.camera,color: Colors.black,),
+                ),
+                ListTile(
+                  onTap: (){
+                    selectedImage(ImageSource.gallery);
+                  },
+                  title: const Text(
+                    "Upload Photo From Gallery",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold
+                    ),
+                    maxLines: 1,
+                  ),
+                  leading: const Icon(Icons.photo_library,color: Colors.black,),
+                ),
+                ListTile(
+                  onTap: (){
+                    selectedVideo(ImageSource.camera);
+                  },
+                  title: const Text(
+                    "Upload Video From Camera",style: TextStyle(
+                    fontWeight: FontWeight.bold
+                    ),
+                    maxLines: 1,
+                  ),
+                  leading: const Icon(Icons.videocam_sharp,color: Colors.black,),
+                ),
+                ListTile(
+                  onTap: (){
+                    selectedVideo(ImageSource.gallery);
+                  },
+                  title: const Text("Upload Video From Gallery",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  leading: const Icon(Icons.video_collection_outlined,color: Colors.black,),
+                ),
+                ListTile(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  title: const Text("Cancel",style: TextStyle(
+                      fontWeight: FontWeight.bold
+                  ),),
+                  leading: const Icon(Icons.cancel_outlined,color: Colors.black,),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+  ///Upload Image
+  selectedImage(ImageSource imageSource) async {
+    try{
+      imageFile=null;
+      var pickedFile = await picker.pickImage(source: imageSource);
+      if (pickedFile != null) {
+          imageFile = pickedFile;
+          Navigator.push(context, MaterialPageRoute(builder: (builder) => ReviewImageView(pickedFile,true))).then((v) {
+                if(v == true){
+                  debugPrint("success uploaded");
+                }else{
+                  debugPrint("facing issue with uploading");
+                }
+                Navigator.pop(context);
+              });
+      }
+    }catch(e){
+      debugPrint(e.toString());
+    }
+  }
+
+  ///Upload Video
+  selectedVideo(ImageSource imageSource) async {
+    try{
+      videoFile=null;
+      var pickedFile = await picker.pickVideo(source: imageSource);
+      if (pickedFile != null) {
+        videoFile = pickedFile;
+        Navigator.push(context, MaterialPageRoute(builder: (builder) => ReviewImageView(pickedFile,false))).then((v) {
+          if(v == true){
+            debugPrint("success uploaded");
+          }else{
+            debugPrint("facing issue with uploading");
+          }
+          Navigator.pop(context);
+        });
+      }
+    }catch(e){
+      debugPrint(e.toString());
+    }
+  }
+
+  // Future<String?> thumnail(String url) async {
+  //   try{
+  //     final fileName = await VideoThumbnail.thumbnailFile(
+  //       video: "https://mridiot.in/upload/user/video/10001/user_video_cy7yawewn0_ForBiggerBlazes.mp4",
+  //       thumbnailPath: (await getTemporaryDirectory()).path,
+  //       imageFormat: ImageFormat.JPEG,
+  //       maxWidth: 500,
+  //       quality: 100,
+  //     );
+  //     return fileName.toString();
+  //   }
+  //   catch(e){
+  //     print(e.toString());
+  //     return null;
+  //   }
+  //
+  // }
 }

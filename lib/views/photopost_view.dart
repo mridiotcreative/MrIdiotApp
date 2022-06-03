@@ -1,18 +1,22 @@
+import 'package:better_video_player/better_video_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
+import 'package:mr_idiot_app/Models/view_post_models.dart';
 import 'global_widget.dart';
+import 'others/better_video_player_custom_control.dart';
 class PhotoPodtView extends StatefulWidget {
-  const PhotoPodtView({Key? key}) : super(key: key);
+  Result result;
+  PhotoPodtView(this.result,);
 
   @override
   State<PhotoPodtView> createState() => _PhotoPodtViewState();
 }
 
 class _PhotoPodtViewState extends State<PhotoPodtView> {
+  late final BetterVideoPlayerController controller;
   List<String> postImage = [
     "assets/images/home/p1.png",
     "assets/images/home/p2.png",
@@ -31,6 +35,19 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
     "assets/images/home/p4.png",
     "assets/images/home/p4.png",
   ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = BetterVideoPlayerController();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,30 +65,45 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
                     width: MediaQuery.of(context).size.width,
                     child: Stack(
                       children: [
-                        SizedBox(
+                        widget.result.videoCategoryType == "1" ?
+                      Center(
+                        child: AspectRatio(
+                          aspectRatio: 16.0 / 9.0,
+                          child: BetterVideoPlayer(
+                            controller: controller,
+                            configuration: BetterVideoPlayerConfiguration(
+                              placeholder: Image.network(
+                                widget.result.thumbnailImage ?? "https://static.thenounproject.com/png/504708-200.png",
+                                fit: BoxFit.contain,
+                              ),
+                              controls: CustomControls(isFullScreen: false),
+                              fullScreenControls: CustomControls(isFullScreen: true),
+                            ),
+                            dataSource: BetterVideoPlayerDataSource(
+                              BetterVideoPlayerDataSourceType.network,
+                              widget.result.uploadUrl!,
+                            ),
+                          ),
+                        ),
+                      )
+                        :SizedBox(
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height*0.4,
                           child: ClipRRect(
                               borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              "assets/images/postimages/postviewcarphoto.png",
-                              fit: BoxFit.fill,
+                            child:
+                            Image.network(
+                              widget.result.thumbnailImage ?? "https://static.thenounproject.com/png/504708-200.png",
+                              fit: BoxFit.contain,
+                              errorBuilder: (ctx, o, n) {
+                                return Icon(Icons.error,color: Colors.white,);
+                              },
                             ),
                           ),
                         ),
-                        Positioned(
-                            right: 5,
-                            top: 5,
-                            child: IconButton(
-                              onPressed: (){
-                                debugPrint("menu");
-                              },
-                              icon: const Icon(
-                                  Icons.more_vert,
-                                color: Colors.black,
-                              ),
-                          )
-                        ),
+                        widget.result.videoCategoryType == "1" ?
+                        Container()
+                        :Container(),
                         Positioned(
                             bottom: 5,
                             right: 5,
@@ -240,22 +272,6 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
                           ),)
                         ],
                       ),
-                      // Container(
-                      //   padding: const EdgeInsets.only(left:10,top: 2,bottom: 2,right: 10),
-                      //   decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(5),
-                      //     border: Border.all(
-                      //       width: 2,
-                      //       color: const Color(0xffFFC909)
-                      //     )
-                      //   ),
-                      //   child: const Text(
-                      //       "follow",
-                      //     style: TextStyle(
-                      //       color: Color(0xffFFC909),
-                      //     ),
-                      //   ),
-                      // ),
                       Stack(
                         children: [
                           Image.asset(
@@ -298,14 +314,11 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
                         return InkWell(
                           onTap: (){
                             setState(() {
-                              Navigator.push(context, MaterialPageRoute(builder: (builder)=> PhotoPodtView()));
+                              //Navigator.push(context, MaterialPageRoute(builder: (builder)=> PhotoPodtView(Result result,)));
                             });
                           },
                           child: Container(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width,
+                            width: MediaQuery.of(context).size.width,
                             decoration: const BoxDecoration(
                               color: Colors.transparent,
                               borderRadius: BorderRadius.all(
@@ -329,8 +342,8 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
                 left: 0,
                 right: 0,
                 child: AppBar(
-                  shadowColor: Colors.transparent,
-                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.black,
+                  backgroundColor: Colors.black54,
                   automaticallyImplyLeading: false,
                   leading: IconButton(
                     icon:const Icon(
@@ -341,6 +354,10 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
                       Navigator.pop(context);
                     },
                   ),
+                  actions: [
+                    IconButton(onPressed: (){},
+                        icon:Icon(Icons.more_vert,color: Colors.white,))
+                  ],
                 )
             )
           ],
