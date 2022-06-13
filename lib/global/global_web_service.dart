@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,6 +11,7 @@ import 'package:mr_idiot_app/Models/view_post_models.dart';
 const String baseUrl = "https://mridiot.in/";
 const String uploadVideoImages = "${baseUrl}upload_video_api";
 const String allVideosImages = "${baseUrl}all_video";
+const String likeCommentPostService = "${baseUrl}like_comment_video";
 
 class WebService{
 
@@ -33,11 +36,14 @@ class WebService{
       var data = jsonDecode(utf8.decode(resData.bodyBytes)) as Map;
       print(data.toString());
       if(data['ResponseMessage'] == "Video Uploaded Successfully."){
+        ToastCustomMessage("Uploaded Successfully",true);
         return true;
       }else {
+        ToastCustomMessage("Something Wrong Please try again",false);
         return false;
       }
     }else{
+      ToastCustomMessage("Something Wrong Please try again",false);
       return false;
     }
   }
@@ -57,4 +63,39 @@ class WebService{
       return null;
     }
   }
+
+  Future likeCommentPost(String videoID,bool isLike,{String? commentDecription}) async {
+    try{
+      var client = http.Client();
+      Response response = await client.post(
+        Uri.parse(likeCommentPostService),
+        body: {
+          "user_id":"10001",
+          "video_id":videoID,
+          "type": isLike ? "2" :"1",
+          "description":isLike ? "" : commentDecription
+        }
+      );
+      if(response.statusCode == 200){
+        return true;//ViewPostsModel.fromJson(jsonDecode(response.body));
+      }else{
+        return false;
+      }
+    }catch(e){
+      return false;
+    }
+  }
+
+
+}
+Future<bool?> ToastCustomMessage(String message,bool isSucess){
+  return Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: isSucess ? Colors.green :Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0
+  );
 }

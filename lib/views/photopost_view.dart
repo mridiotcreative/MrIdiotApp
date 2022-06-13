@@ -1,10 +1,9 @@
 import 'package:better_video_player/better_video_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
-
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:mr_idiot_app/Models/view_post_models.dart';
+import '../viewModels/postView_viewmodel.dart';
 import 'global_widget.dart';
 import 'others/better_video_player_custom_control.dart';
 class PhotoPodtView extends StatefulWidget {
@@ -17,6 +16,9 @@ class PhotoPodtView extends StatefulWidget {
 
 class _PhotoPodtViewState extends State<PhotoPodtView> {
   late final BetterVideoPlayerController controller;
+  final _formKey = GlobalKey<FormState>();
+  bool isLiked = false, isCommentLoading = false;
+  TextEditingController _commentTextController = TextEditingController();
   List<String> postImage = [
     "assets/images/home/p1.png",
     "assets/images/home/p2.png",
@@ -45,7 +47,6 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
   @override
   void dispose() {
     controller.dispose();
-
     super.dispose();
   }
 
@@ -73,8 +74,11 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
                             controller: controller,
                             configuration: BetterVideoPlayerConfiguration(
                               placeholder: Image.network(
-                                widget.result.thumbnailImage ?? "https://static.thenounproject.com/png/504708-200.png",
+                                widget.result.thumbnailImage!,
                                 fit: BoxFit.contain,
+                                errorBuilder: (ctx, o, n) {
+                                  return Icon(Icons.error,color: Colors.white,);
+                                },
                               ),
                               controls: CustomControls(isFullScreen: false),
                               fullScreenControls: CustomControls(isFullScreen: true),
@@ -82,6 +86,9 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
                             dataSource: BetterVideoPlayerDataSource(
                               BetterVideoPlayerDataSourceType.network,
                               widget.result.uploadUrl!,
+                              // errorBuilder: (ctx, o, n) {
+                              //   return Icon(Icons.error,color: Colors.white,);
+                              // },
                             ),
                           ),
                         ),
@@ -93,7 +100,7 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
                               borderRadius: BorderRadius.circular(20),
                             child:
                             Image.network(
-                              widget.result.thumbnailImage ?? "https://static.thenounproject.com/png/504708-200.png",
+                              widget.result.thumbnailImage!,
                               fit: BoxFit.contain,
                               errorBuilder: (ctx, o, n) {
                                 return Icon(Icons.error,color: Colors.white,);
@@ -218,19 +225,30 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
                     children: [
                     Column(
                       children: [
-                        IconButton(onPressed: (){}, icon: const Icon(
-                          Icons.thumb_up_alt_outlined,
-                        color: Colors.white,)),
-                        const Text("Like",style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12
-                        ),)
+                        IconButton(
+                            onPressed: (){
+                              likeFunc(widget.result.id!.toString());
+                              },
+                            icon: Icon(
+                              isLiked ? Icons.thumb_up :Icons.thumb_up_alt_outlined,
+                              color: Colors.white,)
+                        ),
+                        const Text(
+                          "Like",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12
+                          ),
+                        )
                       ],
                     ),
                       Column(
                         children: [
                           IconButton(
-                              onPressed: (){},
+                              onPressed: (){
+                                ///Comment view and add new comment from postview
+                                popUP(context);
+                              },
                               icon: const Icon(
                                 Icons.comment,
                                 color: Colors.white,
@@ -356,7 +374,7 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
                   ),
                   actions: [
                     IconButton(onPressed: (){},
-                        icon:Icon(Icons.more_vert,color: Colors.white,))
+                        icon: const Icon(Icons.more_vert,color: Colors.white,))
                   ],
                 )
             )
@@ -365,5 +383,161 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
       ),
       bottomNavigationBar: bottomBar(true,context)
     );
+  }
+
+  likeFunc(String VideoID) async {
+  setState(() {
+   isLiked = true;
+ });
+  await PostViewViewModel().likePost(VideoID)
+  .then((value) {
+    setState(() {
+      isLiked = value;
+    });
+  });
+  }
+
+
+  Future popUP(BuildContext context) {
+    return showModalBottomSheet(
+        useRootNavigator: true,
+        // isDismissible: true,
+        isScrollControlled: true,
+        context: context,
+        shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20)
+        ),
+        builder: (context) {
+          return StatefulBuilder(
+            builder: (BuildContext context, void Function(void Function()) setState) {
+              return  SingleChildScrollView(
+                child: Container(
+                  //padding: EdgeInsets.only(bottom: 20),
+                  height: MediaQuery.of(context).size.height-100,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Column(
+                    children: [
+                      ///app bar in popup page
+                      AppBar(
+                        shadowColor: Colors.transparent,
+                        backgroundColor: Colors.transparent,
+                        automaticallyImplyLeading: false,
+                        title: Text("Comments"),
+                        leading: IconButton(
+                          onPressed: (){
+                            /// pop navigation
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(Icons.close),
+                          iconSize: 30,
+                        ),
+                      ),
+                      Container(
+                        child: Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20,right: 20),
+                            child: ListView.builder(
+                                itemCount: 50,
+                                itemBuilder: (context,i){
+                                  return Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          border: Border.all(
+                                              color: Colors.black,
+                                              width: 0.5
+                                          )
+                                      ),
+                                      padding: const EdgeInsets.all(10),
+                                      margin: const EdgeInsets.only(top: 5,bottom: 5),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "User $i",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              const Expanded(
+                                                child: Text(
+                                                  "   14th june 2022",
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w600,
+                                                      color: Colors.grey
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Text(
+                                              "Nice Video  good progress mr idiot thanks etc abcdefghijklmnopqrstuvwxyz"+i.toString()
+                                          ),
+                                        ],
+                                      )
+                                  );
+                                }
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 20,right: 20,bottom: 20+MediaQuery.of(context).viewInsets.bottom),
+                        child:
+                        isCommentLoading ?
+                        const CircularProgressIndicator()
+                        :Form(
+                          key: _formKey,
+                          child: TextFormField(
+                            controller: _commentTextController,
+                            validator: (v){
+                              if(v!.isEmpty){
+                                return "Please add comment here";
+                              }else{
+                                return null;
+                              }
+                            },
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                filled: true,
+                                hintStyle: TextStyle(color: Colors.grey[800]),
+                                hintText: "Add Comment Here",
+                                fillColor: Colors.white70,
+                                suffixIcon: IconButton(
+                                  onPressed: (){
+                                    ///send logic
+                                    if (_formKey.currentState!.validate()) {
+                                      setState(() {
+                                        isCommentLoading = true;
+                                      });
+                                      PostViewViewModel().commentPost(widget.result.id!.toString(), _commentTextController.text).then((value){
+                                        setState(() {
+                                          isCommentLoading = false;
+                                        });
+                                      });
+                                    }
+                                  },
+                                  icon: const Icon(Icons.send),
+                                  color: Colors.black,
+                                )
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      );
   }
 }

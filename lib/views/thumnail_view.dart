@@ -17,7 +17,7 @@ class ThumbNailView extends StatefulWidget {
 
 class _ThumbNailViewState extends State<ThumbNailView> {
   XFile? thumNailViewFile;
-  bool isLoading= true;
+  bool isLoading= true,isUploading= false;
   ImagePicker picker = ImagePicker();
   @override
   void initState() {
@@ -47,61 +47,78 @@ class _ThumbNailViewState extends State<ThumbNailView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        leading: IconButton(
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            leading: IconButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back,color: Colors.white,)),
+            backgroundColor: const Color(0xff2D2D37),
+            title: const Text("Thumbnail Image View...",
+              style: TextStyle(
+                  color: Colors.white
+              ),),
+            centerTitle: true,
+            actions: [
+              InkWell(
+                onTap: (){
+                  ///Uploading
+                  setState(() {
+                    isUploading = true;
+                  });
+                  uploading().then((value) {
+                    //Navigator.pop(context,value);
+                    Navigator.pushAndRemoveUntil<dynamic>(context, MaterialPageRoute(builder: (BuildContext context)=>HomeView()), (route) => false);
+                    setState(() {
+                      isUploading = false;
+                    });
+                  });
+                 // Navigator.pushAndRemoveUntil<dynamic>(context, MaterialPageRoute(builder: (BuildContext context)=>HomeView()), (route) => false);
+                },
+                child: Container(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: const Center(
+                        child: Text(
+                          "Upload",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white
+                          ),
+                        )
+                    )
+                ),
+              )
+            ],
+          ),
+          body: Center(
+            child: isLoading ? Text("loading...") :Container(
+              child:  Image.file(File(thumNailViewFile!.path),fit: BoxFit.cover,),
+            ),
+          ),
+        floatingActionButton: FloatingActionButton(
             onPressed: (){
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back,color: Colors.white,)),
-        backgroundColor: const Color(0xff2D2D37),
-        title: const Text("Thumbnail Image View...",
-          style: TextStyle(
-              color: Colors.white
-          ),),
-        centerTitle: true,
-        actions: [
-          InkWell(
-            onTap: (){
-              ///Uploading
-              setState(() {
-                // isLoading
-              });
-              uploading().then((value) {
-                //Navigator.pop(context,value);
-                Navigator.pushAndRemoveUntil<dynamic>(context, MaterialPageRoute(builder: (BuildContext context)=>HomeView()), (route) => false);
-             });
-             // Navigator.pushAndRemoveUntil<dynamic>(context, MaterialPageRoute(builder: (BuildContext context)=>HomeView()), (route) => false);
+              popUP(context);
             },
             child: Container(
-                padding: const EdgeInsets.only(right: 10),
-                child: const Center(
-                    child: Text(
-                      "Upload",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white
-                      ),
-                    )
-                )
-            ),
-          )
-        ],
-      ),
-      body: Center(
-        child: isLoading ? Text("loading...") :Container(
-          child:  Image.file(File(thumNailViewFile!.path),fit: BoxFit.cover,),
+            child: Icon(Icons.edit),
+            )
         ),
-      ),
-    floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          popUP(context);
-        },
-        child: Container(
-        child: Icon(Icons.edit),
+        ),
+        isUploading ?
+        Positioned(
+            child: Container(
+                color: Colors.black54,
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: Center(child: CircularProgressIndicator())
+            )
         )
-    ),
+            :Container()
+      ],
     );
   }
 
