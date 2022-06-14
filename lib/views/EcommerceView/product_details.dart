@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:mr_idiot_app/views/EcommerceView/place_order.dart';
 
 class ProductDetail extends StatefulWidget {
   const ProductDetail({Key? key}) : super(key: key);
@@ -248,16 +249,21 @@ class _ProductDetailState extends State<ProductDetail> {
               ),
             ),
           ),
-            Container(
-                width: MediaQuery.of(context).size.width*0.5,
-                height: MediaQuery.of(context).size.height*0.10,
-                color: Colors.amber,
-                child:const Center(
-                  child: Text(
-                    "Buy Now",
-                    style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (builder)=> const PlaceOrder()));
+              },
+              child: Container(
+                  width: MediaQuery.of(context).size.width*0.5,
+                  height: MediaQuery.of(context).size.height*0.10,
+                  color: Colors.amber,
+                  child:const Center(
+                    child: Text(
+                      "Buy Now",
+                      style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
+              ),
             ),
           ],
         ),
