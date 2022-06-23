@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:mr_idiot_app/views/EcommerceView/add_addess_view.dart';
 import 'package:mr_idiot_app/views/EcommerceView/place_order.dart';
 
 class ProductDetail extends StatefulWidget {
@@ -251,7 +252,8 @@ class _ProductDetailState extends State<ProductDetail> {
           ),
             InkWell(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (builder)=> const PlaceOrder()));
+                //Navigator.push(context, MaterialPageRoute(builder: (builder)=> const PlaceOrder()));
+                Navigator.push(context, MaterialPageRoute(builder: (builder)=>AddAddressView()));
               },
               child: Container(
                   width: MediaQuery.of(context).size.width*0.5,

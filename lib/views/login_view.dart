@@ -195,7 +195,7 @@ class _LoginViewState extends State<LoginView> {
                         decoration: BoxDecoration(
                             color: const Color(0xffFFC909),
 //                            color: const Color(0xff0A0808),
-                            borderRadius: BorderRadius.circular(17)
+                            borderRadius: BorderRadius.circular(10)
                         ),
                         child: Center(
                           child: Column(
