@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mr_idiot_app/views/EcommerceView/place_order.dart';
 
 class AddAddressView extends StatefulWidget {
   const AddAddressView({Key? key}) : super(key: key);
@@ -244,7 +245,8 @@ class _AddAddressViewState extends State<AddAddressView> {
                   onTap: (){
                     setState(() {
                       ///save click
-                      Navigator.pop(context);
+                      //Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (builder)=>PlaceOrder()));
                     });
                   },
                   child: Container(

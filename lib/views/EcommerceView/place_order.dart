@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'ecommerce_home_view.dart';
-
 enum SingingCharacter { wallet, netBank,card,cod }
 class PlaceOrder extends StatefulWidget {
   const PlaceOrder({Key? key}) : super(key: key);
@@ -10,638 +7,843 @@ class PlaceOrder extends StatefulWidget {
   _PlaceOrderState createState() => _PlaceOrderState();
 }
 class _PlaceOrderState extends State<PlaceOrder> {
-  bool isChecked = false;
-  bool isVisible = false;
-  bool isPlaceOrder= false;
-  final _formKey = GlobalKey<FormState>();
-  SingingCharacter? _character = SingingCharacter.wallet;
-  String? deliveryAddress='D-189,Deer Haven Drive, Fountain Inn,SC,South Carolina ,29644';
-  final TextEditingController _deliveryAddressController= TextEditingController();
-
+  Color gColor = Color(0xfff0f4f7);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,//Color(0xfff0f4f7),
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
-        title:  const Text('Place Order', style:TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold),),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height/10,
-            margin: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3),
-                border: Border.all(color: Colors.black12.withOpacity(0.1))
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.check_circle_outlined, color: isPlaceOrder==false?Colors.black:Colors.green,),
-                const SizedBox(width: 3,),
-                const Text('Address',
-                  style:TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 17),),
-                const SizedBox(width: 15,),
-                Icon(Icons.check_circle_outlined,color:  isPlaceOrder==false?Colors.grey:Colors.amber,),
-                const SizedBox(width: 3,),
-                Text('Payment',
-                  style:TextStyle(fontWeight: FontWeight.bold,color: isPlaceOrder==false?Colors.grey:Colors.black,fontSize: 17),),
-              ],
-            ),
+        automaticallyImplyLeading: false,
+        leading:IconButton(
+            padding: EdgeInsets.zero,
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              size: 22,
+              color: Colors.white,
+            )
+        ),
+        backgroundColor: const Color(0xff2D2D37),
+        title: const Text(
+          "Order Summary",
+          style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold
           ),
-          isPlaceOrder==false
-              ? Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 10,right: 10),
-                    child: Row(
-                      children:  [
-                        const SizedBox(width: 10,),
-                        const Expanded(child: Text('Delivery Address',style:  TextStyle(fontSize: 19,fontWeight: FontWeight.bold))),
-                        InkWell(
-                          onTap: ()
-                          {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    content: Stack(
-                                      children: <Widget>[
-                                        Form(
-                                          key: _formKey,
-                                          child: SingleChildScrollView(
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.min,
-                                              children:  <Widget>[
-                                                const Text('Address',style: TextStyle(fontSize: 22),),
-                                                 Padding(
-                                                  padding: const EdgeInsets.only(top: 20),
-                                                  child: TextField(
-                                                    controller: _deliveryAddressController,
-                                                    decoration: const InputDecoration(
-                                                      border: OutlineInputBorder(borderSide: BorderSide(width: 1.0)),
-                                                      hintText: 'Enter Address',
-                                                      hintStyle: TextStyle(fontSize: 20,color: Colors.grey),
-                                                      contentPadding:EdgeInsets.fromLTRB(10,10,10,0),
-                                                      // labelText: 'Email',
-                                                    ),
-                                                    minLines: 10,
-                                                    keyboardType: TextInputType.multiline,
-                                                    maxLines: null,
-                                                    style: const TextStyle(
-                                                        color: Colors.black
-                                                    ),
-                                                  ),
-                                                ),
-                                                InkWell(
-                                                  onTap: ()
-                                                  {
-                                                    if(_deliveryAddressController.text.isEmpty)
-                                                    {
-                                                      setState(() {
-                                                        /// Add API's Address here
-                                                        deliveryAddress='Address is not Added';
-                                                      });
-                                                    }else{
-                                                      setState(() {
-                                                        deliveryAddress=_deliveryAddressController.text;
-                                                      });
-                                                    }
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: Container(
-                                                    margin: const EdgeInsets.only(top: 30),
-                                                    width: MediaQuery.of(context).size.width,
-                                                    height: 48,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.deepOrange,
-                                                      borderRadius: BorderRadius.circular(30),
-                                                      gradient: LinearGradient(
-                                                          begin: Alignment.bottomRight,
-                                                          end: Alignment.topLeft,
-                                                          colors: [Colors.deepOrange.shade300,Colors.amber]
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.deepOrangeAccent.withOpacity(0.8),
-                                                          spreadRadius: 0.5,
-                                                          blurRadius: 3,
-                                                          offset: const Offset(0, 0),
-                                                          // changes position of shadow
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    child: const Center(
-                                                        child: Text('Ok',style: TextStyle(fontSize: 21,color: Colors.white),)),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+        ),
+      ),
+      body: SafeArea(
+        child: Container(
+          color: gColor,
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                     Container(
+                       padding: const EdgeInsets.only(left:20,top:10,bottom: 10,right: 20),
+                       color: Colors.white,
+                       child: Column(
+                         children: [
+                           Container(
+                             padding: const EdgeInsets.only(top:10,left: 20,right: 20),
+                             child: Row(
+                               children: [
+                                 Container(
+                                   padding: const EdgeInsets.all(3),
+                                   margin: const EdgeInsets.only(bottom: 5),
+                                   decoration: BoxDecoration(
+                                       borderRadius: BorderRadius.circular(100),
+                                       border: Border.all(
+                                           width: 1,
+                                           color: Colors.blue
+                                       )
+                                   ),
+                                   child: const Icon(Icons.check,color: Colors.blue,size: 20,),
+                                 ),
+                                 Expanded(child: Container(
+                                   margin: const EdgeInsets.only(bottom: 7,left: 10,right: 10),
+                                   decoration: BoxDecoration(
+                                       border: Border.all(
+                                           width: 1,
+                                           color: Colors.blue
+                                       )
+                                   ),
+                                 )),
+                                 Stack(
+                                   children: [
+                                     Container(
+                                       padding: const EdgeInsets.all(13),
+                                       margin: const EdgeInsets.only(bottom: 5),
+                                       decoration: BoxDecoration(
+                                           borderRadius: BorderRadius.circular(100),
+                                           color: Colors.blue,
+                                           border: Border.all(
+                                               width: 1,
+                                               color: Colors.blue
+                                           )
+                                       ),
+                                     ),
+                                     const Padding(
+                                       padding: EdgeInsets.only(left: 10,top: 6,),
+                                       child: Text(
+                                         "2",
+                                         style: TextStyle(
+                                             color: Colors.white
+                                         ),
+                                       ),
+                                     )
+                                   ],
+                                 ),
+                                 Expanded(child: Container(
+                                   margin: const EdgeInsets.only(bottom: 7,left: 10,right: 10),
+                                   decoration: BoxDecoration(
+                                       border: Border.all(
+                                           width: 1,
+                                           color: Colors.grey
+                                       )
+                                   ),
+                                 )),
+                                 Stack(
+                                   children: [
+                                     Container(
+                                       padding: const EdgeInsets.all(13),
+                                       margin: const EdgeInsets.only(bottom: 5),
+                                       decoration: BoxDecoration(
+                                           borderRadius: BorderRadius.circular(100),
+                                           color: Colors.white,
+                                           border: Border.all(
+                                               width: 1,
+                                               color: Colors.blue
+                                           )
+                                       ),
+                                     ),
+                                     const Padding(
+                                       padding: EdgeInsets.only(left: 10,top: 6,),
+                                       child: Text(
+                                         "3",
+                                         style: TextStyle(
+                                             color: Colors.blue
+                                         ),
+                                       ),
+                                     )
+                                   ],
+                                 ),
+                               ],
+                             ),
+                           ),
+                           Container(
+                             padding: const EdgeInsets.only(top:0,left: 5,right: 5),
+                             child: Row(
+                               children: [
+                                 Container(
+                                     padding: const EdgeInsets.all(3),
+                                     margin: const EdgeInsets.only(bottom: 5),
+                                     child: const Text("Address")
+                                 ),
+                                 Expanded(child: Container(
+                                   margin: const EdgeInsets.only(bottom: 7,left: 10,right: 10),
+                                   decoration: BoxDecoration(
+                                       border: Border.all(
+                                           width: 1,
+                                           color: Colors.transparent
+                                       )
+                                   ),
+                                 )),
+                                 Container(
+                                     padding: const EdgeInsets.all(3),
+                                     margin: const EdgeInsets.only(bottom: 5),
+                                     child: const Text(
+                                       "Order Summary",
+                                       style: TextStyle(
+                                           fontWeight: FontWeight.bold
+                                       ),
+                                     )
+                                 ),
+                                 Expanded(
+                                     child: Container(
+                                       margin: const EdgeInsets.only(bottom: 7,left: 10,right: 10),
+                                       decoration: BoxDecoration(
+                                           border: Border.all(
+                                               width: 1,
+                                               color: Colors.transparent
+                                           )
+                                       ),
+                                     )
+                                 ),
+                                 Container(
+                                     padding: const EdgeInsets.all(3),
+                                     margin: const EdgeInsets.only(bottom: 5),
+                                     child: const Text("Payment")
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ],
+                       ),
+                     ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(left:20,top:10,bottom: 10,right: 20),
+                        color:Colors.white,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                const Expanded(
+                                    child: Text(
+                                        "Deliver to:",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+
+                                      ),
+                                    )
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      width: 1,
+                                      color: Colors.grey
+                                    )
+                                  ),
+                                  child: const Text(
+                                    "Change",
+                                    style: TextStyle(
+                                      color: Colors.blue
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+
+                            Row(
+                              children: [
+                                const Text(
+                                    "Sivam Maurya",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    "Home",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      backgroundColor: Colors.grey.withOpacity(0.4)
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10,),
+                            const Text(
+                              "552, rameshwar nagar, new borivali road, pandesara, udhna surat 20202020",
+                            ),
+                            const SizedBox(height: 10,),
+                            const Text(
+                              "+911234567890",
+                              maxLines: 1,
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(left:20,top:10,bottom: 10,right: 20),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset("assets/images/cycle.png",width: MediaQuery.of(context).size.width*0.4,),
+                                Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                            "geeky hashtag 26t single speed steel in frame 18 inched height and width description ",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        const Text(
+                                          "₹7,399.00",
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20
                                           ),
                                         ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        const Text(
+                                          "In Stock",
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: const [
+                                            Text(
+                                              "Sold by ",
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Rajesh Enterprises",
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                color: Color(0xff056d84)
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: const [
+                                            Text(
+                                              "Color Name:",
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              "orange",
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ],
+                                        ),
                                       ],
-                                    ),
-                                  );
-                                });
-                          },
-                          child: Container(
-                            height: MediaQuery.of(context).size.height/19,
-                            width:75,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              gradient:  LinearGradient(
-                                  colors: [Colors.deepOrange.shade300,Colors.amber],
-                                  begin: Alignment.bottomRight,
-                                  end: Alignment.topLeft
-                              ),
+                                  )
+                                )
+                              ],
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const[
-                                Center(child: Icon(Icons.add,color: Colors.white,)),
-                                Padding(
-                                  padding: EdgeInsets.only(right: 4),
-                                  child: Center(child: Text('Add',style: TextStyle(color: Colors.white),)),
+                            const SizedBox(height: 5,),
+                            Row(
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width * 0.12,
+                                  height: 35,
+                                  margin: const EdgeInsets.only(),
+                                  decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          Colors.white,
+                                          Colors.grey.withOpacity(0.2)
+                                        ],
+                                      ),
+                                      border: Border.all(
+                                          width: 1,
+                                        color: Colors.grey
+                                      ),
+                                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(10),bottomLeft: Radius.circular(10))
+                                  ),
+                                  child: const Icon(Icons.delete_outline_outlined),
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width*0.15,
+                                  height: 35,
+                                  padding: const EdgeInsets.only(top: 5),
+                                  margin: const EdgeInsets.only(),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1,
+                                          color: Colors.grey),
+                                  ),
+                                  child: const Text(
+                                    "1",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Color(0xff056d84)
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width*0.12,
+                                  height: 35,
+                                  //padding: const EdgeInsets.all(10),
+                                  margin: const EdgeInsets.only(),
+                                  decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          Colors.white,
+                                          Colors.grey.withOpacity(0.2)
+                                        ],
+                                      ),
+                                      border: Border.all(
+                                          width: 1,
+                                          color: Colors.grey
+                                      ),
+                                      borderRadius: const BorderRadius.only(topRight: Radius.circular(10),bottomRight: Radius.circular(10))
+                                  ),
+                                  child: const Icon(Icons.add),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(top: 8),
+                                  margin: const EdgeInsets.only(left:10),
+                                  height: 35,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1,
+                                          color: Colors.grey
+                                      ),
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                  child: SizedBox(
+                                    width: MediaQuery.of(context).size.width*0.15,
+                                    child: const Text(
+                                      "Delete",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                      ),
+                                      textAlign: TextAlign.center,)
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20,),
+                            Row(
+                              children: const [
+                                Icon(Icons.local_offer_outlined),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: Text(
+                                      "Apply Coupon"
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                    "Select",
+                                  style: TextStyle(
+                                      color: Color(0xff056d84)
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10,),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Stack(
+                        children: [
+
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            color: Colors.white,
+                            margin: const EdgeInsets.only(top:7),
+                            padding: const EdgeInsets.only(left:20,top:15,bottom: 20,right: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Order Details",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: const [
+                                    Expanded(
+                                      child: Text(
+                                        "Bag total",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 13
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    Text(
+                                      "₹6,450.00",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontSize: 13
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: const [
+                                    Expanded(
+                                      child: Text(
+                                        "Big Saving",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 13
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    Text(
+                                      "-₹5,160.00",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontSize: 13
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: const [
+                                    Expanded(
+                                      child: Text(
+                                        "Coupon Savings",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 13
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Apply Coupon",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Color(0xff056d84)
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: const [
+                                    Expanded(
+                                      child: Text(
+                                        "Delivery",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 13
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Free",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: const [
+                                    Expanded(
+                                      child: Text(
+                                        "Amount Payable",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 13
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    Text(
+                                      "₹1,290.00",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ),
-                        )
-                      ],
-                    ),
+                          Positioned(
+                            top:0,
+                              child:Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gColor,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                ],
+                              )
+                          )
+                        ],
+                      )
+                    ],
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 200,
-                    margin: const EdgeInsets.all(10),
-                    padding: const EdgeInsets.only(left: 14),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(color: Colors.black12.withOpacity(0.1))
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children:  [
-                            const Expanded(child:  SizedBox(height: 1,)),
-                            PopupMenuButton(itemBuilder: (context) => [
-                              const PopupMenuItem(child: Text('Edit'),value: 1,),
-                              const PopupMenuItem(child: Text('Delete'),value: 2,),
-                            ],),
-                          ],
-                        ),
-                        const Text('Sagar Mishra',style:  TextStyle(fontSize: 19,fontWeight: FontWeight.bold),),
-                        Text(deliveryAddress!=null?deliveryAddress!:'Address is not Added Yet1',maxLines: 2,overflow: TextOverflow.ellipsis,style:  TextStyle(fontSize: 18,)),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Row(
-                            //crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children:  [
-                              Align(alignment: Alignment.bottomRight,child: Text('Delivery Address',style: TextStyle(fontSize: 20,color: Colors.grey.shade400))),
-                              Checkbox(
-                                  value: isChecked,
-                                  onChanged: (bool? value)
-                                  {
-                                    setState(() {
-                                      isChecked=value!;
-                                    });
-                                  })
-                            ],),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 55,
-                    margin: const EdgeInsets.all(10),
-                    padding: const EdgeInsets.only(left: 10,right: 10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(color: Colors.black12.withOpacity(0.1))
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Expanded(child: Text('Add Voucher Code',style:  TextStyle(fontSize: 19,fontWeight: FontWeight.bold),)),
-                        InkWell(
-                            onTap: ()
-                            {
-                              setState(() {
-                                isVisible==true?isVisible=false:isVisible=true;
-                              });
-
-                            },
-                            child: const Icon(Icons.keyboard_arrow_down,size: 30,))
-                      ],
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 15,top: 10),
-                    child: Text('Order Summery',style:  TextStyle(fontSize: 19,fontWeight: FontWeight.bold),),
-                  ),
-                  isVisible==true?Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 55,
-                    margin: const EdgeInsets.fromLTRB(10,20,10,10),
-                    padding: const EdgeInsets.only(left: 10,right: 10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(color: Colors.black12.withOpacity(0.1))
-                    ),
-                    child: const TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Enter Code',
-                        hintStyle: TextStyle(fontSize:20),
+                ),
+              ),
+              Container(
+                height: 0.5,
+                color: Colors.grey,
+              ),
+              Container(
+                color:Colors.white,
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            "₹1,290.00",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 15
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            "view details",
+                            style: TextStyle(
+                                color: Color(0xff056d84),
+                                fontSize: 13
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
                       ),
                     ),
-                  ):const SizedBox(),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    //height: MediaQuery.of(context).size.height/2.1,
-                    margin: const EdgeInsets.all(10),
-                    padding: const EdgeInsets.only(left: 15,top: 10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(color: Colors.black12.withOpacity(0.1))
-                    ),
-                    child: Column(
-                      children: [
-                        Table(
-                          columnWidths: const <int, TableColumnWidth>{
-                            0: FlexColumnWidth(1.7),
-                            1: FlexColumnWidth(),
-                            2: FlexColumnWidth(),
-                          },
-                          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                          children:const [
-                            TableRow(
-                                children: [
-                                  TableCell(
-                                    child: Text('Product Name',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
-                                  ),
-                                  TableCell(
-                                    child: Text('Qty',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
-                                  ),
-                                  TableCell(
-                                    child: Text('Amount',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
-                                  ),
-                                ]
-                            )
-                          ],
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color:const Color(0xff2D2D37),
+                      ),
+                      padding: const EdgeInsets.all(15),
+                      child: const Text(
+                          "Proceed To Payment",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 15
                         ),
-                        const SizedBox(height: 20,),
-                        Table(
-                          columnWidths: const <int, TableColumnWidth>{
-                            0: FlexColumnWidth(1.7),
-                            1: FlexColumnWidth(),
-                            2: FlexColumnWidth(),
-                          },
-                          defaultVerticalAlignment: TableCellVerticalAlignment.top,
-                          children:const [
-                            TableRow(
-                                children: [
-                                  TableCell(
-                                    child:Padding(
-                                      padding: EdgeInsets.only(right: 17),
-                                      child: Text('Fossil Gen 5 Carlyle Touch Screen Smartwatch with Speaker',textAlign: TextAlign.center,style: TextStyle(fontSize: 15)),
-                                    ),
-                                  ),
-                                  TableCell(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 9),
-                                      child: Text('1',style: TextStyle(fontSize: 18)),
-                                    ),
-                                  ),
-                                  TableCell(
-                                    child: Text('₹ 5,499',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17)),
-                                  ),
-                                ]
-                            )
-                          ],
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 14),
-                          child: Divider(
-                            color: Colors.black12,
-                          ),
-                        ),
-                        const SizedBox(height: 20,),
-                        Table(
-                          columnWidths: const <int, TableColumnWidth>{
-                            0: FlexColumnWidth(1.7),
-                            1: FlexColumnWidth(),
-                            2: FlexColumnWidth(),
-                          },
-                          defaultVerticalAlignment: TableCellVerticalAlignment.top,
-                          children:const [
-                            TableRow(
-                                children: [
-                                  TableCell(
-                                    child:Padding(
-                                      padding: EdgeInsets.only(right: 17),
-                                      child: Text('Fossil Gen 5 Carlyle Touch Screen Smartwatch with Speaker',textAlign: TextAlign.center,style: TextStyle(fontSize: 15)),
-                                    ),
-                                  ),
-                                  TableCell(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 9),
-                                      child: Text('1',style: TextStyle(fontSize: 18)),
-                                    ),
-                                  ),
-                                  TableCell(
-                                    child: Text('₹ 5,499',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17)),
-                                  ),
-                                ]
-                            )
-                          ],
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 14),
-                          child: Divider(
-                            color: Colors.black12,
-                          ),
-                        ),
-                        const SizedBox(height: 20,),
-                        Table(
-                          columnWidths: const <int, TableColumnWidth>{
-                            0: FlexColumnWidth(1.7),
-                            1: FlexColumnWidth(),
-                            2: FlexColumnWidth(),
-                          },
-                          defaultVerticalAlignment: TableCellVerticalAlignment.top,
-                          children:const [
-                            TableRow(
-                                children: [
-                                  TableCell(
-                                    child:Padding(
-                                      padding: EdgeInsets.only(right: 17),
-                                      child: Text('Fossil Gen 5 Carlyle Touch Screen Smartwatch with Speaker',textAlign: TextAlign.center,style: TextStyle(fontSize: 15)),
-                                    ),
-                                  ),
-                                  TableCell(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 9),
-                                      child: Text('1',style: TextStyle(fontSize: 18)),
-                                    ),
-                                  ),
-                                  TableCell(
-                                    child: Text('₹ 5,499',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17)),
-                                  ),
-                                ]
-                            )
-                          ],
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 14),
-                          child: Divider(
-                            color: Colors.black12,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Row(
-                            children:  const [
-                              Expanded(child: Text('Total Amount',style:TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)),
-                              Padding(
-                                padding: EdgeInsets.only(right: 18),
-                                child: Text('₹ 16,497',style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold,fontSize: 18)),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          )
-              : Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 10,right: 10),
-                    child: Row(
-                      children: const [
-                        SizedBox(width: 10,),
-                        Expanded(child: Text('Payment Method',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 22),)),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height/13,
-                    margin: const EdgeInsets.all(10),
-                    padding: const EdgeInsets.only(left: 15),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(color: Colors.black12.withOpacity(0.1))
-                    ),
-                    child: Row(
-                      children: [
-                        const Expanded(child: Text('Wallet/UPI')),
-                        Radio<SingingCharacter>(
-                          activeColor: Colors.deepOrange,
-                          value: SingingCharacter.wallet,
-                          groupValue: _character,
-                          onChanged: (SingingCharacter? value) {
-                            setState(() { _character = value; });},
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height/13,
-                    margin: const EdgeInsets.all(10),
-                    padding: const EdgeInsets.only(left: 15),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(color: Colors.black12.withOpacity(0.1))
-                    ),
-                    child: Row(
-                      children: [
-                        const Expanded(child: Text('Net Banking')),
-                        Radio<SingingCharacter>(
-                          activeColor: Colors.deepOrange,
-                          value: SingingCharacter.netBank,
-                          groupValue: _character,
-                          onChanged: (SingingCharacter? value) {
-                            setState(() { _character = value; });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height/13,
-                    margin: const EdgeInsets.all(10),
-                    padding: const EdgeInsets.only(left: 15),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(color: Colors.black12.withOpacity(0.1))
-                    ),
-                    child: Row(
-                      children: [
-                        const Expanded(child: Text('Credit/Debit/ATM Card')),
-                        Radio<SingingCharacter>(
-                          activeColor: Colors.deepOrange,
-                          value: SingingCharacter.cod,
-                          groupValue: _character,
-                          onChanged: (SingingCharacter? value) {
-                            setState(() { _character = value; });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height/13,
-                    padding: const EdgeInsets.only(left: 15),
-                    margin: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(color: Colors.black12.withOpacity(0.1))
-                    ),
-                    child: Row(
-                      children: [
-                        const Expanded(child: Text('Cash on Delivery')),
-                        Radio<SingingCharacter>(
-                          activeColor: Colors.deepOrange,
-                          value: SingingCharacter.card,
-                          groupValue: _character,
-                          onChanged: (SingingCharacter? value) {
-                            setState(() { _character = value; });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8,left: 15),
-                    child: Row(
-                      children:  const [
-                        Expanded(child: Text('Total Amount',style:TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)),
-                        Padding(
-                          padding: EdgeInsets.only(right: 18),
-                          child: Text('₹ 16,497',style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold,fontSize: 18)),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: ()
-            {
-              if(isPlaceOrder==false)
-              {
-                setState(() {
-                  isPlaceOrder=true;
-                });
-              }
-              else
-              {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        content: SingleChildScrollView(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Image.asset('assets/images/ecommerce/success5.png',fit: BoxFit.cover,),
-                              const SizedBox(height: 20,),
-                              const Text('Payment Successfull',style: TextStyle(color: Colors.green,fontSize: 22),),
-                              const SizedBox(height: 30,),
-                              const Text('Thank you for your payment. An automated payment receipt will be sent to your registered email',textAlign: TextAlign.center,),
-                              const SizedBox(height: 30,),
-                              InkWell(
-                                onTap: ()
-                                {
-                                  Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => const EcommerceHomeView(),),
-                                  );
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.only(top: 30),
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: Colors.deepOrange,
-                                    borderRadius: BorderRadius.circular(30),
-                                    gradient: LinearGradient(
-                                        begin: Alignment.bottomRight,
-                                        end: Alignment.topLeft,
-                                        colors: [Colors.deepOrange.shade300,Colors.amber]
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.deepOrangeAccent.withOpacity(0.8),
-                                        spreadRadius: 0.5,
-                                        blurRadius: 3,
-                                        offset: const Offset(0, 0),
-                                        // changes position of shadow
-                                      ),
-                                    ],
-                                  ),
-                                  child: const Center(child:  Text('Done',style: TextStyle(fontSize: 21,color: Colors.white),)),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    });
-              }
-            },
-            child: Center(
-              child: Container(
-                margin: const EdgeInsets.fromLTRB(50, 10, 50, 20),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height/14,
-                decoration: BoxDecoration(
-                  color: Colors.deepOrange,
-                  borderRadius: BorderRadius.circular(30),
-                  gradient: LinearGradient(
-                      begin: Alignment.bottomRight,
-                      end: Alignment.topLeft,
-                      colors: [Colors.deepOrange.shade300,Colors.amber]
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.deepOrangeAccent.withOpacity(0.8),
-                      spreadRadius: 0.5,
-                      blurRadius: 3,
-                      offset: const Offset(0, 0),
-                      // changes position of shadow
-                    ),
+                      ),
+                    )
                   ],
                 ),
-                child: Center(child: Text(isPlaceOrder==false?"Confirm":"Proceed",style: const TextStyle(fontSize: 21,color: Colors.white),)),
-              ),
-            ),
+              )
+            ],
           ),
-        ],
+        )
       ),
-    )
     );
   }
 }
