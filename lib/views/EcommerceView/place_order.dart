@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mr_idiot_app/views/EcommerceView/place_order1.dart';
 enum SingingCharacter { wallet, netBank,card,cod }
 class PlaceOrder extends StatefulWidget {
   const PlaceOrder({Key? key}) : super(key: key);
@@ -821,19 +822,24 @@ class _PlaceOrderState extends State<PlaceOrder> {
                         ],
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color:const Color(0xff2D2D37),
-                      ),
-                      padding: const EdgeInsets.all(15),
-                      child: const Text(
-                          "Proceed To Payment",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 15
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (builder)=>PlaceOrderView()));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color:const Color(0xff2D2D37),
+                        ),
+                        padding: const EdgeInsets.all(15),
+                        child: const Text(
+                            "Proceed To Payment",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 15
+                          ),
                         ),
                       ),
                     )
