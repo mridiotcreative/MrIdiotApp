@@ -440,7 +440,7 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
           ),
         ),
       ),
-        bottomNavigationBar:globalECommerceBottomBar(true,context),// bottomBar(true,context)
+        bottomNavigationBar:bottomBar(false,context),//globalECommerceBottomBar(true,context),// bottomBar(true,context)
     );
   }
 }

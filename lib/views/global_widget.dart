@@ -8,49 +8,115 @@ XFile? imageFile,videoFile;
 ImagePicker picker = ImagePicker();
 Widget bottomBar(bool cart,BuildContext context){
   return Container(
-    padding: const EdgeInsets.only(top:10,bottom:10),
-    color: const Color(0xffC4C4C4),
+    height: 55,
+    padding: const EdgeInsets.only(top:10,bottom:13),
+    color: const Color(0xffFCC609),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        IconButton(
-          onPressed: (){
-            Navigator.pushAndRemoveUntil<dynamic>(context, MaterialPageRoute(builder: (BuildContext context)=>HomeView()), (route) => false);
+        InkWell(
+          onTap: (){
+            if(!cart){
+              Navigator.pushAndRemoveUntil<dynamic>(context, MaterialPageRoute(builder: (BuildContext context)=>HomeView()), (route) => false);
+            }
           },
-          icon: const Icon(
-            Icons.home,
-            color: Colors.black,
-            size: 40,
+          child: Column(
+            children: const [
+              ImageIcon(
+                AssetImage("assets/images/home.png"),
+                size: 20,
+              ),
+              Text(
+                "Home",
+                style: TextStyle(
+                  fontSize: 10
+                ),
+              )
+            ],
           ),
         ),
+        Column(
+          children: const [
+            ImageIcon(
+              AssetImage("assets/images/shorts.png"),
+              size: 20,
+            ),
+            Text(
+                "Shorts",
+              style: TextStyle(
+                  fontSize: 10
+              ),
+            )
+          ],
+        ),
+        cart?
         InkWell(
           onTap: (){
             popUP(context);
           },
-          child: const ImageIcon(
-            AssetImage("assets/images/add_icon.png",),
-            color: Colors.black,
-            size: 35,
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 3,
+                color: Colors.black
+              ),
+              borderRadius: BorderRadius.circular(5),
+              color: const Color(0xffFCC609),
+            ),
+            padding: const EdgeInsets.all(3),
+            child: const ImageIcon(
+              AssetImage("assets/images/add_icon.png",),
+              color: Colors.black,
+              size: 20,
+            ),
           ),
+        )
+        :const ImageIcon(
+          AssetImage("assets/images/ecommerce/mid_icon.png",),
+          color: Colors.black,
+          size: 50,
         ),
-        cart ?
-        IconButton(
-          onPressed: (){
-            Navigator.pushAndRemoveUntil<dynamic>(context, MaterialPageRoute(builder: (BuildContext context) => EcommerceHomeView()), (route) => false);
+        Column(
+          children: const [
+            ImageIcon(
+              AssetImage("assets/images/ideas.png"),
+              size: 20,
+            ),
+            Text(
+                "Ideas",
+              style: TextStyle(
+                  fontSize: 10
+              ),
+            )
+          ],
+        ),
+        //cart ?
+        InkWell(
+          onTap: (){
+            if(cart){
+              Navigator.pushAndRemoveUntil<dynamic>(context, MaterialPageRoute(builder: (BuildContext context) => EcommerceHomeView()), (route) => false);
+            }
           },
-          icon: const Icon(
-            Icons.shopping_cart,
-            color: Colors.black,
-            size: 40,
+          child: Column(
+            children: const [
+              ImageIcon(
+                AssetImage("assets/images/cart1.png"),
+                size: 20,
+              ),
+              Text(
+                  "Shop",
+                style: TextStyle(
+                    fontSize: 10
+                ),
+              )
+            ],
           ),
         )
-            :
-        const ImageIcon(
-          AssetImage("assets/images/forward_icon.png"),
-          size: 40,
-        )
-        ,
+        // : const ImageIcon(
+        //   AssetImage("assets/images/forward_icon.png"),
+        //   size: 40,
+        // ),
       ],
     ),
   );

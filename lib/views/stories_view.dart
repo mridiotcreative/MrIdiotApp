@@ -168,7 +168,11 @@ class _StoryViewState extends State<StoryView> {
                                   :InkWell(
                                       onTap: (){
                                         setState(() {
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => ReelView()));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => ReelView())).then((value) {
+                                            setState(() {
+                                              PostData();
+                                            });
+                                          });
                                         });
                                       },
                                       child: Container(
@@ -252,7 +256,7 @@ class _StoryViewState extends State<StoryView> {
                             ),
                             /// Story View
                             SizedBox(
-                              height: postImage.length*100,
+                              height: (postImage.length * 250),// + (MediaQuery.of(context).size.height*0.12) + (MediaQuery.of(context).size.height*0.20),
                               child: isLoading == true ?
                               const Center(
                                   child: CircularProgressIndicator(color: Colors.white,),
@@ -269,7 +273,11 @@ class _StoryViewState extends State<StoryView> {
                                     return InkWell(
                                       onTap: (){
                                         setState(() {
-                                          Navigator.push(context, MaterialPageRoute(builder: (builder)=> PhotoPodtView(viewPostsModel!.result![index])));
+                                          Navigator.push(context, MaterialPageRoute(builder: (builder)=> PhotoPodtView(viewPostsModel!.result![index]))).then((value) {
+                                            setState(() {
+                                              PostData();
+                                            });
+                                          });
                                         });
                                       },
                                       child: Stack(
@@ -489,6 +497,7 @@ class _StoryViewState extends State<StoryView> {
                   debugPrint("facing issue with uploading");
                 }
                 Navigator.pop(context);
+                PostData();
               });
       }
     }catch(e){
@@ -510,6 +519,7 @@ class _StoryViewState extends State<StoryView> {
             debugPrint("facing issue with uploading");
           }
           Navigator.pop(context);
+          PostData();
         });
       }
     }catch(e){
