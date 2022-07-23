@@ -8,7 +8,7 @@ XFile? imageFile,videoFile;
 ImagePicker picker = ImagePicker();
 Widget bottomBar(bool cart,BuildContext context){
   return Container(
-    height: 55,
+    height: 65,
     padding: const EdgeInsets.only(top:10,bottom:13),
     color: const Color(0xffFCC609),
     child: Row(
@@ -25,7 +25,7 @@ Widget bottomBar(bool cart,BuildContext context){
             children: const [
               ImageIcon(
                 AssetImage("assets/images/home.png"),
-                size: 20,
+                size: 25,
               ),
               Text(
                 "Home",
@@ -40,7 +40,7 @@ Widget bottomBar(bool cart,BuildContext context){
           children: const [
             ImageIcon(
               AssetImage("assets/images/shorts.png"),
-              size: 20,
+              size: 25,
             ),
             Text(
                 "Shorts",
@@ -81,7 +81,7 @@ Widget bottomBar(bool cart,BuildContext context){
           children: const [
             ImageIcon(
               AssetImage("assets/images/ideas.png"),
-              size: 20,
+              size: 25,
             ),
             Text(
                 "Ideas",
@@ -100,10 +100,11 @@ Widget bottomBar(bool cart,BuildContext context){
           },
           child: Column(
             children: const [
-              ImageIcon(
-                AssetImage("assets/images/cart1.png"),
-                size: 20,
-              ),
+              // ImageIcon(
+              //   AssetImage("assets/images/cart1.png"),
+              //   size: 25,
+              // ),
+              Icon(Icons.shopping_cart_outlined,size: 25,color: Colors.black,),
               Text(
                   "Shop",
                 style: TextStyle(

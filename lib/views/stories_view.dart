@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -122,15 +123,22 @@ class _StoryViewState extends State<StoryView> {
             return NotificationListener<ScrollNotification>(
               onNotification: _scrollListener,
               child: Scaffold(
-                backgroundColor: Colors.black,
+                backgroundColor: Colors.white ,
                 body: SafeArea(
                   child: Stack(
                     children: [
                       SingleChildScrollView(
                         controller: _controllerAxis,
-                        physics: ClampingScrollPhysics(),
+                        physics: const ClampingScrollPhysics(),
                         child: Column(
                           children: [
+                            ///grey border
+                            Container(
+                              margin: const EdgeInsets.only(top:5),
+                              height: 5,
+                              width: MediaQuery.of(context).size.width,
+                              color: Colors.grey,
+                            ),
                             /// Story View
                             SizedBox(
                               height: MediaQuery.of(context).size.height*0.20,
@@ -149,20 +157,33 @@ class _StoryViewState extends State<StoryView> {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         border: Border.all(
-                                          color: Colors.yellow,
-                                          width: 2
+                                          color: Colors.black,
+                                          width: 2.5
                                         ),
                                         color: Colors.grey
                                       ),
                                       height: MediaQuery.of(context).size.height*0.2,
                                       width: MediaQuery.of(context).size.width*0.2,
-                                      child: const Center(
-                                        child: Icon(
-                                          Icons.add,
-                                          color: Colors.black,
-                                          size: 40,
-                                        )
-                                      ),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: const [
+                                          //Container(),
+                                          Icon(
+                                            Icons.add,
+                                            color: Colors.black,
+                                            size: 40,
+                                          ),
+                                          Text(
+                                            "CREATE STORY",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 8
+                                            ),
+                                          )
+                                        ],
+                                      )
                                     ),
                                   )
                                   :InkWell(
@@ -203,6 +224,12 @@ class _StoryViewState extends State<StoryView> {
                                 },
                               ),
                             ),
+                            ///grey border
+                            Container(
+                              height: 5,
+                              width: MediaQuery.of(context).size.width,
+                              color: Colors.grey,
+                            ),
                             /// FilterView
                             filterHide ? /// FilterView
                             Container(
@@ -220,7 +247,7 @@ class _StoryViewState extends State<StoryView> {
                                           margin: const EdgeInsets.only(left:7,top:10,right:7,bottom: 2),
                                           decoration: BoxDecoration(
                                             border: Border.all(
-                                                color: Colors.white,
+                                                color: Colors.grey,
                                                 width: 2
                                             ),
                                             borderRadius: BorderRadius.circular(100),
@@ -243,7 +270,7 @@ class _StoryViewState extends State<StoryView> {
                                             fontFamily: "YesevaOne",
                                             fontWeight: FontWeight.bold,
                                             fontSize: 12,
-                                            color: Colors.white
+                                            color: Colors.black
                                         ),
                                       )
                                     ],
@@ -253,6 +280,29 @@ class _StoryViewState extends State<StoryView> {
                             )
                                 : Container(
                               height: MediaQuery.of(context).size.height*0.12,
+                            ),
+
+                            ///slider
+                            CarouselSlider.builder(
+                              itemCount: 3,
+                              itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
+                                  Container(
+                                    margin: const EdgeInsets.all(5),
+                                    child: Image.asset("assets/images/postimages/banner.png" ,fit:BoxFit.fill),
+                                  ),
+                              options: CarouselOptions(
+                                initialPage: 0,
+                                enableInfiniteScroll: true,
+                                autoPlay: true,
+                                viewportFraction: 1.0,
+                                height: MediaQuery.of(context).size.height * 0.2,
+                              ),
+                            ),
+                            ///grey border
+                            Container(
+                              height: 5,
+                              width: MediaQuery.of(context).size.width,
+                              color: Colors.grey,
                             ),
                             /// Story View
                             SizedBox(
@@ -326,7 +376,7 @@ class _StoryViewState extends State<StoryView> {
                       filterHide ?
                       Container()
                         :Container(
-                          color: Colors.black,
+                          color: Colors.white,
                           height: MediaQuery.of(context).size.height*0.12,
                           child: ListView.builder(
                             itemCount: filterImage.length,
@@ -338,7 +388,7 @@ class _StoryViewState extends State<StoryView> {
                                       margin: const EdgeInsets.only(left:7,top:10,right:7,bottom: 2),
                                       decoration: BoxDecoration(
                                         border: Border.all(
-                                          color: Colors.white,
+                                          color: Colors.grey,
                                           width: 2
                                         ),
                                         borderRadius: BorderRadius.circular(100),
@@ -361,7 +411,7 @@ class _StoryViewState extends State<StoryView> {
                                         fontFamily: "YesevaOne",
                                         fontWeight: FontWeight.bold,
                                         fontSize: 12,
-                                      color: Colors.white
+                                      color: Colors.black
                                     ),
                                   )
                                 ],

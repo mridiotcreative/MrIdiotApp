@@ -17,10 +17,11 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         //backgroundColor: Colors.red,
-        backgroundColor: Color(0xffD2D4DA),
+        backgroundColor:const Color(0xffFCC609),
+//        backgroundColor: Color(0xffD2D4DA),
         automaticallyImplyLeading: false,
         leading: const Icon(Icons.menu,size: 35,),
         centerTitle: true,
@@ -53,7 +54,7 @@ class _HomeViewState extends State<HomeView> {
           "Mr Idiot",
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontSize: 20  ,
+              fontSize: 25,
               fontFamily: "YesevaOne",
               fontWeight: FontWeight.w900
           ),
