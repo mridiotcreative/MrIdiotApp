@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mr_idiot_app/views/EcommerceView/add_addess_view.dart';
 import 'package:mr_idiot_app/views/EcommerceView/place_order.dart';
+import 'package:mr_idiot_app/views/EcommerceView/sub_total_view.dart';
 
 class ProductDetail extends StatefulWidget {
   const ProductDetail({Key? key}) : super(key: key);
@@ -222,34 +223,39 @@ class _ProductDetailState extends State<ProductDetail> {
       bottomNavigationBar:  Container(
         child: Row(
           children: [
-            Container(
-            width: MediaQuery.of(context).size.width*0.5,
-            height: MediaQuery.of(context).size.height*0.10,
-            color: Colors.white,
-            child:Padding(
-              padding: const EdgeInsets.only(right: 5.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: (){
-                      //Navigator.push(context, MaterialPageRoute(builder: (builder)=> EcommerceHomeView()));
-                    },
-                    icon: const Icon(
-                      Icons.shopping_cart,
-                      color: Colors.black,
-                      size: 40,
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (builder)=> const SubTotal()));
+              },
+              child: Container(
+              width: MediaQuery.of(context).size.width*0.5,
+              height: MediaQuery.of(context).size.height*0.10,
+              color: Colors.white,
+              child:Padding(
+                padding: const EdgeInsets.only(right: 5.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: (){
+                        // Navigator.push(context, MaterialPageRoute(builder: (builder)=> const SubTotal()));
+                      },
+                      icon: const Icon(
+                        Icons.shopping_cart,
+                        color: Colors.black,
+                        size: 40,
+                      ),
                     ),
-                  ),
-                  const Text(
-                    "Add to Cart",
-                    style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
-                  ),
-                ],
+                    const Text(
+                      "Add to Cart",
+                      style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
-            ),
           ),
+            ),
             InkWell(
               onTap: (){
                 //Navigator.push(context, MaterialPageRoute(builder: (builder)=> const PlaceOrder()));
