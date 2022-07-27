@@ -16,7 +16,7 @@ class _SubTotalState extends State<SubTotal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade400,
+      backgroundColor: Color(0xff2D2D37),
       body: SafeArea(
         child: Column(
           children: [
@@ -646,7 +646,7 @@ class _SubTotalState extends State<SubTotal> {
           ],
         ),
       ),
-      bottomNavigationBar: globalECommerceBottomBar(true,context)
+      bottomNavigationBar:bottomBar(false,context),// globalECommerceBottomBar(true,context)
     );
 
   }

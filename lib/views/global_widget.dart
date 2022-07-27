@@ -77,6 +77,7 @@ Widget bottomBar(bool cart,BuildContext context){
           color: Colors.black,
           size: 50,
         ),
+        cart?
         Column(
           children: const [
             ImageIcon(
@@ -85,6 +86,20 @@ Widget bottomBar(bool cart,BuildContext context){
             ),
             Text(
                 "Ideas",
+              style: TextStyle(
+                  fontSize: 10
+              ),
+            )
+          ],
+        )
+        :Column(
+          children: const [
+            ImageIcon(
+              AssetImage("assets/images/order.png"),
+              size: 25,
+            ),
+            Text(
+              "Orders",
               style: TextStyle(
                   fontSize: 10
               ),
