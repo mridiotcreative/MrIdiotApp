@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mr_idiot_app/global/global_web_service.dart';
 import 'package:mr_idiot_app/views/EcommerceView/add_addess_view.dart';
 import 'package:mr_idiot_app/views/EcommerceView/place_order.dart';
 import 'package:mr_idiot_app/views/EcommerceView/sub_total_view.dart';
@@ -225,6 +227,15 @@ class _ProductDetailState extends State<ProductDetail> {
           children: [
             InkWell(
               onTap: (){
+                Fluttertoast.showToast(
+                    msg: "Added To Cart",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Color(0xff2D2D37),
+                    textColor: Colors.white,
+                    fontSize: 16.0,
+                );
                 Navigator.push(context, MaterialPageRoute(builder: (builder)=> const SubTotal()));
               },
               child: Container(
