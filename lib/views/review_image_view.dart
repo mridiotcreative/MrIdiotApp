@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mr_idiot_app/viewModels/ReviewImageViewModel.dart';
-import 'package:mr_idiot_app/views/thumnail_view.dart';
+import 'package:mr_idiot_app/views/preupload_image_vid_review_view.dart';
 import 'package:video_player/video_player.dart';
 
 class ReviewImageView extends StatefulWidget {
@@ -57,41 +57,31 @@ class _ReviewImageViewState extends State<ReviewImageView> {
               onPressed: (){
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.arrow_back,color: Colors.white,)),
-            backgroundColor: const Color(0xff2D2D37),
-            title: Text(widget.imageFile == true ? "Uploading Image..." : "Uploading Video...",
+              icon: const Icon(Icons.arrow_back,color: Colors.black,)),
+            backgroundColor: Colors.white,//const Color(0xff2D2D37),
+            title: Text( "Preview",//widget.imageFile == true ? "Uploading Image..." : "Uploading Video...",
             style: const TextStyle(
-              color: Colors.white
+              color: Colors.black,//Colors.white
             ),),
-            centerTitle: true,
+            centerTitle: false,
             actions: [
               InkWell(
                 onTap: (){
-                  ///Uploading
-                  setState(() {
-                    // isLoading
-                    isUploading = true;
+                  ///navigate to thumnail Uploading
+
+                  Navigator.push(context, MaterialPageRoute(builder: (builder) => PreUploadReviewView(null,false,widget.image!.path))).then((v) {
+
                   });
-                  widget.imageFile == true ?
-                  uploading().then((value) {
-                    Navigator.pop(context,value);
-                    isUploading = false;
-                  })
-                  :Navigator.push(context, MaterialPageRoute(builder: (builder) => ThumbNailView(widget.image!.path))).then((value){
-                    setState(() {
-                      // isLoading
-                      isUploading = false;
-                    });
-                  });
+
                 },
                 child: Container(
                     padding: const EdgeInsets.only(right: 10),
-                    child: Center(
+                    child: const Center(
                         child: Text(
-                          widget.imageFile == true ? "Upload" : "Next",
-                          style: const TextStyle(
+                          "Next",
+                          style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white
+                            color: Colors.black
                           ),
                         )
                     )

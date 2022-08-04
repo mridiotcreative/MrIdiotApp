@@ -65,6 +65,7 @@ flutter:
     - assets/images/home/
     - assets/images/
     - assets/images/ecommerce/
+    - assets/images/icons/
 
   # font style#
   fonts:

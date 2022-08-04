@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mr_idiot_app/views/EcommerceView/ecommerce_home_view.dart';
 import 'package:mr_idiot_app/views/home_view.dart';
+import 'package:mr_idiot_app/views/preupload_image_vid_review_view.dart';
 import 'package:mr_idiot_app/views/review_image_view.dart';
 XFile? imageFile,videoFile;
 ImagePicker picker = ImagePicker();
@@ -265,7 +266,7 @@ selectedImage(BuildContext context,ImageSource imageSource) async {
     var pickedFile = await picker.pickImage(source: imageSource);
     if (pickedFile != null) {
       imageFile = pickedFile;
-      Navigator.push(context, MaterialPageRoute(builder: (builder) => ReviewImageView(pickedFile,true))).then((v) {
+      Navigator.push(context, MaterialPageRoute(builder: (builder) => PreUploadReviewView(pickedFile,true,""))).then((v) {
         if(v == true){
           debugPrint("success uploaded");
         }else{
@@ -273,6 +274,14 @@ selectedImage(BuildContext context,ImageSource imageSource) async {
         }
         Navigator.pop(context);
       });
+      // Navigator.push(context, MaterialPageRoute(builder: (builder) => ReviewImageView(pickedFile,true))).then((v) {
+      //   if(v == true){
+      //     debugPrint("success uploaded");
+      //   }else{
+      //     debugPrint("facing issue with uploading");
+      //   }
+      //   Navigator.pop(context);
+      // });
     }
   }catch(e){
     debugPrint(e.toString());
@@ -286,6 +295,14 @@ selectedVideo(BuildContext context,ImageSource imageSource) async {
     var pickedFile = await picker.pickVideo(source: imageSource);
     if (pickedFile != null) {
       videoFile = pickedFile;
+      // Navigator.push(context, MaterialPageRoute(builder: (builder) => PreUploadReviewView(pickedFile,false))).then((v) {
+      //   if(v == true){
+      //     debugPrint("success uploaded");
+      //   }else{
+      //     debugPrint("facing issue with uploading");
+      //   }
+      //   Navigator.pop(context);
+      // });
       Navigator.push(context, MaterialPageRoute(builder: (builder) => ReviewImageView(pickedFile,false))).then((v) {
         if(v == true){
           debugPrint("success uploaded");
