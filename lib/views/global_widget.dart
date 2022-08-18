@@ -9,8 +9,8 @@ XFile? imageFile,videoFile;
 ImagePicker picker = ImagePicker();
 Widget bottomBar(bool cart,BuildContext context){
   return Container(
-    height: 65,
-    padding: const EdgeInsets.only(top:10,bottom:13),
+    height: MediaQuery.of(context).padding.bottom > 10 ? 40 + MediaQuery.of(context).padding.bottom : 50 + MediaQuery.of(context).padding.bottom,
+    padding: const EdgeInsets.only(top:0,bottom:0),
     color: const Color(0xffFCC609),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -23,6 +23,8 @@ Widget bottomBar(bool cart,BuildContext context){
             }
           },
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               ImageIcon(
                 AssetImage("assets/images/home.png"),
@@ -31,6 +33,7 @@ Widget bottomBar(bool cart,BuildContext context){
               Text(
                 "Home",
                 style: TextStyle(
+                    fontWeight: FontWeight.bold,
                   fontSize: 10
                 ),
               )
@@ -38,6 +41,8 @@ Widget bottomBar(bool cart,BuildContext context){
           ),
         ),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             ImageIcon(
               AssetImage("assets/images/shorts.png"),
@@ -46,6 +51,7 @@ Widget bottomBar(bool cart,BuildContext context){
             Text(
                 "Shorts",
               style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   fontSize: 10
               ),
             )
@@ -57,6 +63,8 @@ Widget bottomBar(bool cart,BuildContext context){
             popUP(context);
           },
           child: Container(
+            height: 35,
+            width: 35,
             decoration: BoxDecoration(
               border: Border.all(
                 width: 3,
@@ -76,10 +84,12 @@ Widget bottomBar(bool cart,BuildContext context){
         :const ImageIcon(
           AssetImage("assets/images/ecommerce/mid_icon.png",),
           color: Colors.black,
-          size: 50,
+          size: 40,
         ),
         cart?
         Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             ImageIcon(
               AssetImage("assets/images/ideas.png"),
@@ -88,12 +98,15 @@ Widget bottomBar(bool cart,BuildContext context){
             Text(
                 "Ideas",
               style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   fontSize: 10
               ),
             )
           ],
         )
         :Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             ImageIcon(
               AssetImage("assets/images/order.png"),
@@ -102,6 +115,7 @@ Widget bottomBar(bool cart,BuildContext context){
             Text(
               "Orders",
               style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   fontSize: 10
               ),
             )
@@ -115,15 +129,22 @@ Widget bottomBar(bool cart,BuildContext context){
             }
           },
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               // ImageIcon(
               //   AssetImage("assets/images/cart1.png"),
               //   size: 25,
               // ),
-              Icon(Icons.shopping_cart_outlined,size: 25,color: Colors.black,),
+              Icon(
+                Icons.shopping_cart_outlined,
+                size: 25,
+                color: Colors.black,
+              ),
               Text(
                   "Shop",
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
                     fontSize: 10
                 ),
               )

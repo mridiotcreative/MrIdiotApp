@@ -39,9 +39,10 @@ class _LoginViewState extends State<LoginView> {
                           child:  Text(
                             "Mr Idiot",
                             style: TextStyle(
-                                fontFamily:"YesevaOne",// "YesevaOne",//TimesNewRoman
+                                fontFamily:"TimesNewRoman",// "YesevaOne",//TimesNewRoman
                                 fontSize: 40,
-                                fontWeight: FontWeight.bold
+                                fontWeight: FontWeight.w900,
+                                color: Color(0xff0E204F)
                             ),
                           ),
                         )
@@ -65,27 +66,64 @@ class _LoginViewState extends State<LoginView> {
                           borderRadius: BorderRadius.circular(17)
                       ),
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 15.0),
                             child: Image.asset("assets/images/flag.png",height: MediaQuery.of(context).size.height*0.046,),
                           ),
                           const SizedBox(width:10,),
+                          // Text(
+                          //     "+91",
+                          //     style: TextStyle(
+                          //         fontFamily: "Lato",
+                          //         fontSize: 25,
+                          //         fontWeight: FontWeight.bold
+                          //     ),
+                          // ),
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.only(left:10,right:15),
+                              // child: TextFormField(
+                              //   keyboardType: TextInputType.number,
+                              //   maxLength: 10,
+                              //   cursorColor: Colors.black,
+                              //   style: const TextStyle(
+                              //       color: Colors.black,
+                              //       fontFamily: "Lato",
+                              //       fontSize: 25,
+                              //       fontWeight: FontWeight.bold
+                              //   ),
+                              //   decoration: const InputDecoration(
+                              //     contentPadding: EdgeInsets.symmetric(vertical: 0,horizontal: 0),
+                              //     prefixIcon: Text(
+                              //       "+91  ",
+                              //       style: TextStyle(
+                              //           fontFamily: "Lato",
+                              //           fontSize: 25,
+                              //           fontWeight: FontWeight.bold
+                              //       ),
+                              //     ),
+                              //     counterText: "",
+                              //   ),
+                              // ),
                               child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                maxLength: 10,
-                                cursorColor: Colors.black,
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontFamily: "Lato",
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold
                                 ),
+                                keyboardType: TextInputType.number,
+                                maxLength: 10,
                                 decoration: const InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(vertical: 8,horizontal: 0),
+                                  isDense: true,
+                                  border: InputBorder. none,
+                                  contentPadding: EdgeInsets.all(0),
+                                  focusedBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                  counterText: "",
                                   prefixIcon: Text(
                                     "+91  ",
                                     style: TextStyle(
@@ -94,8 +132,8 @@ class _LoginViewState extends State<LoginView> {
                                         fontWeight: FontWeight.bold
                                     ),
                                   ),
-                                  counterText: "",
                                 ),
+                                cursorColor: Colors.black,
                               ),
                             ),
                           )

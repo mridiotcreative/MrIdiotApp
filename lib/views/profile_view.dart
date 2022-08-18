@@ -54,31 +54,11 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,//Colors.white.withOpacity(0.1),
+      backgroundColor: Colors.white,//Colors.white.withOpacity(0.1),
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        shadowColor: Colors.transparent,
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        // leading:  Image.asset("assets/images/setting.png",),
-        // centerTitle: true,
-        // title: const Text("creativescienceteam",
-        //   textAlign: TextAlign.center,
-        //   maxLines: 1,
-        //   overflow: TextOverflow.ellipsis,
-        //   style: TextStyle(
-        //       color: Colors.white,
-        //       fontSize: 16  ,
-        //       fontFamily: "Roboto",
-        //       fontWeight: FontWeight.w700
-        //   ),),
-        // actions: [
-        //   IconButton(
-        //     onPressed: (){},
-        //     icon: const Icon(Icons.more_vert_outlined,
-        //       color: Color(0xffFFC909),
-        //       size: 25,
-        //     ),
-        //   )
-        // ],
         title: Container(
           color: Colors.transparent,
           child: Padding(
@@ -98,7 +78,7 @@ class _ProfileViewState extends State<ProfileView> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 16  ,
                         fontFamily: "Roboto",
                         fontWeight: FontWeight.w700
@@ -117,6 +97,7 @@ class _ProfileViewState extends State<ProfileView> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              /// follow , following and photo
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: Row(
@@ -126,14 +107,14 @@ class _ProfileViewState extends State<ProfileView> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children:const[
                         Text("46.4k",style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 16  ,
                             fontFamily: "Roboto",
                             fontWeight: FontWeight.bold
 
                         ),),
                         Text("Followers",style: TextStyle(
-                            color: Color(0xffFFFFFF),
+                            color: Colors.black,
                             fontSize: 13  ,
                             fontFamily: "Roboto",
                             fontWeight: FontWeight.w100
@@ -199,7 +180,7 @@ class _ProfileViewState extends State<ProfileView> {
                                 ),
                                 child: const Align(
                                   alignment: Alignment.center,
-                                  child:Icon(Icons.add,color: Colors.white,size: 23,),
+                                  child:Icon(Icons.add,color: Colors.black,size: 23,),
 
                               ),
                             )
@@ -211,14 +192,14 @@ class _ProfileViewState extends State<ProfileView> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children:const[
                         Text("142",style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 16  ,
                             fontFamily: "Roboto",
                             fontWeight: FontWeight.bold
 
                         ),),
                         Text("Following",style: TextStyle(
-                            color: Color(0xffFFFFFF),
+                            color: Colors.black,
                             fontSize: 13  ,
                             fontFamily: "Roboto",
                             fontWeight: FontWeight.w100
@@ -229,6 +210,8 @@ class _ProfileViewState extends State<ProfileView> {
                   ],
                 ),
               ),
+
+              /// name
               Container(
                 margin: const EdgeInsets.only(top: 20,right: 20),
                 child:  IntrinsicHeight(
@@ -246,13 +229,13 @@ class _ProfileViewState extends State<ProfileView> {
                       Padding(
                         padding: EdgeInsets.only(left: 8.0,right: 8),
                         child: VerticalDivider(
-                          color: Colors.white,
+                          color: Colors.black,
                           thickness: 1,
                         ),
                       ),
                       Text("Engineering",
                           style: TextStyle(
-                              color: Color(0xffFFFFFF),
+                              color: Colors.black,
                               fontSize: 18  ,
                               fontFamily: "Roboto",
                               fontWeight: FontWeight.w700
@@ -262,6 +245,8 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                 ),
               ),
+
+              /// black description
               const Padding(
                 padding: EdgeInsets.only(top: 15.0,left: 12,right: 12),
                 child: Text("Hello! This is Sangam here from team Creative Science.we always try to make something new and creative Thanks for your support.From mishra sangam",
@@ -269,11 +254,13 @@ class _ProfileViewState extends State<ProfileView> {
                   style: TextStyle(
                     fontFamily: "Roboto",
                     fontWeight: FontWeight.w600,
-                    color: Color(0xffFFFFFF),
+                    color: Colors.black,
                     fontSize: 14
                   ),
                 ),
               ),
+
+              ///blue name
               const Padding(
                 padding: EdgeInsets.only(top:5.0),
                 child: Text("@CREATIVESCIENCE",
@@ -286,12 +273,14 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                 ),
               ),
+
+              ///edit button
               Padding(
-                padding:const EdgeInsets.only(left: 6.0,right:6.0,top: 15),
+                padding:const EdgeInsets.only(left: 0,right: 0,top: 15),
                 child: Container(
                   height: MediaQuery.of(context).size.height*0.05,
                   decoration: BoxDecoration(
-                    color: Color(0xffFCC609),
+                    color: const Color(0xffFCC609),
                     borderRadius: BorderRadius.circular(3),
                   ),
                   child: const Center(
@@ -300,14 +289,16 @@ class _ProfileViewState extends State<ProfileView> {
                         fontWeight: FontWeight.w900,
                         fontFamily: "Roboto",
                         fontSize: 18,
-                        color:Color(0xffFFFFFF)
+                        color:Colors.black
                       ),
                     ),
                   ),
                 ),
               ),
+
+              ///filter
               Container(
-                margin: const EdgeInsets.only(top: 5),
+                margin: const EdgeInsets.only(top: 0),
                 height: MediaQuery.of(context).size.height*0.13,
                 child: ListView.builder(
                   itemCount: filterImage.length,
@@ -316,36 +307,40 @@ class _ProfileViewState extends State<ProfileView> {
                     return Row(
                       children: [
                         index ==0 ? Container(
-                          margin: const EdgeInsets.only(left:7,top:10,right:30,bottom: 2),
+                          margin: const EdgeInsets.only(left:7,top:0,right:7,bottom: 2),
                           decoration: BoxDecoration(
-                            color: Color(0xffBBBDC2),
+                            color: Colors.white,//Color(0xffBBBDC2),
                             border: Border.all(
-                                color: Color(0xffFCC609),
+                                color: const Color(0xffFCC609),
                                 width: 1
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(100),
+                            image: const DecorationImage(
+                              image: AssetImage("assets/images/backgroundcircleprofile.png",),
+                              fit: BoxFit.contain
+                            )
                           ),
-                          height: MediaQuery.of(context).size.height*0.085,
-                          width: MediaQuery.of(context).size.width*0.16,
-                          child: Icon(Icons.add,color: Colors.black,size: 40,),
-                        ):SizedBox(),
+                          height: 70,//MediaQuery.of(context).size.height*0.085,
+                          width: 70,//MediaQuery.of(context).size.width*0.16,
+                          child: const Icon(Icons.add,color: Colors.black,size: 40,),
+                        ): const SizedBox(),
                         Container(
-                            margin: const EdgeInsets.only(left:7,top:10,right:7,bottom: 2),
+                            margin: const EdgeInsets.only(left:7,top:0,right:7,bottom: 2),
                             decoration: BoxDecoration(
                               border: Border.all(
-                                  color: Color(0xffFCC609),
+                                  color: const Color(0xffFCC609),
                                   width: 1
                               ),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(100),
                             ),
-                            height: MediaQuery.of(context).size.height*0.085,
-                            width: MediaQuery.of(context).size.width*0.16,
+                            height: 70,//MediaQuery.of(context).size.height*0.085,
+                            width: 70,//MediaQuery.of(context).size.width*0.16,
                             child: ClipRRect(
                               child: Image.asset(
                                 filterImage[index],
                                 fit: BoxFit.cover,
                               ),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(100),
                             )
                         ),
                       ],
@@ -353,15 +348,16 @@ class _ProfileViewState extends State<ProfileView> {
                   },
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30.0,right: 30.0,top: 0),
-                child: Center(
-                  child: Divider(
-                    color: Colors.white.withOpacity(0.6),
-                    thickness: 1,
-                  ),
-                ),
-              ),
+
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 30.0,right: 30.0,top: 0),
+              //   child: Center(
+              //     child: Divider(
+              //       color: Colors.black.withOpacity(0.6),
+              //       thickness: 1,
+              //     ),
+              //   ),
+              // ),
               // const TabBar(
               //   unselectedLabelColor: Colors.white,
               //   labelColor: Colors.amber,
@@ -374,54 +370,68 @@ class _ProfileViewState extends State<ProfileView> {
               //   indicatorColor: Colors.white,
               //   indicatorSize: TabBarIndicatorSize.tab,
               // )
+
               Container(
-                margin: EdgeInsets.only(top: 12),
+                width: MediaQuery.of(context).size.width,
+                height: 35,
                 color: const Color(0xff131618),
-                child:  Padding(
-                  padding:  const EdgeInsets.only(top: 0.0,right: 10,left: 10),
-                  child:  DefaultTabController(
+                child:  Center(
+                  child: DefaultTabController(
                     length: 4,
                     child:TabBar(
                       isScrollable: true,
                       indicator: UnderlineTabIndicator(
                         borderSide: BorderSide(
-                            width: 2.0, color: Colors.white.withOpacity(0.5)),
+                            width: 3.0, color: Colors.white.withOpacity(0.5)),
                       ),
-                      tabs: const [
-                        Tab(
-                         child: Text("Post",style: TextStyle(
-                           color: Color(0xffFFFFFF),
-                           fontFamily: "Roboto",
-                           fontWeight: FontWeight.w500,
-                           fontSize: 18
+                      tabs: [
+                        const Tab(
+                          child: Text("Post",style: TextStyle(
+                              color: Color(0xffFFFFFF),
+                              fontFamily: "Roboto",
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20
                           ),
-                         ),
+                          ),
                         ),
-                        Tab(
+                        const Tab(
                           child: Text("Images",style: TextStyle(
                               color: Color(0xffFFFFFF),
                               fontFamily: "Roboto",
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.bold,
                               fontSize: 18
                           ),
                           ),
                         ),
-                        Tab(
+                        const Tab(
                           child: Text("Videos",style: TextStyle(
                               color: Color(0xffFFFFFF),
                               fontFamily: "Roboto",
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.bold,
                               fontSize: 18
                           ),
                           ),
                         ),
                         Tab(
-                          child: Text("follow",style: TextStyle(
-                              color: Color(0xffFFFFFF),
-                              fontFamily: "Roboto",
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18
-                          ),
+                          child: Container(
+                            //height: 40,
+                            width: 70,
+                            //margin: EdgeInsets.all(0),
+                            decoration: BoxDecoration(
+                              //color: Colors.red,
+                              image: DecorationImage(
+                                image: AssetImage("assets/images/followbackground.png"),
+                                fit: BoxFit.contain
+                              )
+                            ),
+                            //padding: EdgeInsets.all(12),
+                            // child: Text("follow",style: TextStyle(
+                            //     color: Color(0xffFFFFFF),
+                            //     fontFamily: "Roboto",
+                            //     fontWeight: FontWeight.w500,
+                            //     fontSize: 18
+                            // ),
+                            // ),
                           ),
                         ),
                       ],
@@ -431,45 +441,41 @@ class _ProfileViewState extends State<ProfileView> {
                         });
                       },
                     ),
-                  ),
+                  )
                 ),
               ),
-             Container(
-               child:  Container(
-                 height: postImage.length*100,
-                 child: MasonryGridView.count(
-                   physics: NeverScrollableScrollPhysics(),
-                   padding: const EdgeInsets.all(10),
-                   crossAxisCount: 2,
-                   mainAxisSpacing: 5,
-                   crossAxisSpacing: 5,
-                   itemCount: postImage.length,
-                   itemBuilder: (context, index) {
-                     return InkWell(
-                       onTap: (){
-                         setState(() {
-                          // Navigator.push(context, MaterialPageRoute(builder: (builder)=> const PhotoPodtView()));
-                         });
-                       },
-                       child: Container(
-                         width: MediaQuery
-                             .of(context)
-                             .size
-                             .width,
-                         decoration: const BoxDecoration(
-                           color: Colors.transparent,
-                           borderRadius: BorderRadius.all(
-                               Radius.circular(15)),
-                         ),
-                         child: ClipRRect(
-                           borderRadius: const BorderRadius.all(
-                               Radius.circular(2)),
-                           child: Image.asset(postImage[index], fit: BoxFit.cover,),
-                         ),
+
+              SizedBox(
+               height: postImage.length*100,
+               child: MasonryGridView.count(
+                 physics: const NeverScrollableScrollPhysics(),
+                 padding: const EdgeInsets.all(10),
+                 crossAxisCount: 2,
+                 mainAxisSpacing: 5,
+                 crossAxisSpacing: 5,
+                 itemCount: postImage.length,
+                 itemBuilder: (context, index) {
+                   return InkWell(
+                     onTap: (){
+                       setState(() {
+                        // Navigator.push(context, MaterialPageRoute(builder: (builder)=> const PhotoPodtView()));
+                       });
+                     },
+                     child: Container(
+                       width: MediaQuery.of(context).size.width,
+                       decoration: const BoxDecoration(
+                         color: Colors.transparent,
+                         borderRadius: BorderRadius.all(
+                             Radius.circular(15)),
                        ),
-                     );
-                   },
-                 ),
+                       child: ClipRRect(
+                         borderRadius: const BorderRadius.all(
+                             Radius.circular(2)),
+                         child: Image.asset(postImage[index], fit: BoxFit.cover,),
+                       ),
+                     ),
+                   );
+                 },
                ),
              )
             ],

@@ -603,7 +603,7 @@ class _ReelViewState extends State<ReelView> {
           ),
         ],
       ),
-      bottomNavigationBar: bottomBar(false,context),
+      bottomNavigationBar: bottomBar(true,context),
     );
   }
 }

@@ -23,7 +23,18 @@ class _HomeViewState extends State<HomeView> {
         backgroundColor:const Color(0xffFCC609),
 //        backgroundColor: Color(0xffD2D4DA),
         automaticallyImplyLeading: false,
-        leading: const Icon(Icons.menu,size: 35,),
+        leading:
+        //const Icon(Icons.menu_rounded,size: 40,),
+        // ImageIcon(
+        //   AssetImage("assets/images/hambugericon.png",),
+        // ),
+        // Image.asset(
+        //   'assets/images/hambugericon.png',
+        //   width: 20,
+        //   height: 20,
+        //   fit: BoxFit.fitWidth,
+        // ),
+        const Icon(Icons.menu_rounded,size: 40,),
         centerTitle: true,
         title: searchBarView ? Container(
           margin: const EdgeInsets.all(0),
