@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mr_idiot_app/viewModels/ReviewImageViewModel.dart';
 import 'package:mr_idiot_app/views/photopost_view.dart';
@@ -270,10 +271,9 @@ class _StoryViewState extends State<StoryView> {
                                         filterText[index],
                                         textAlign: TextAlign.center,
                                         maxLines: 1,
-                                        style: const TextStyle(
-                                            fontFamily: "YesevaOne",
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10,
+                                        style: GoogleFonts.suezOne(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 12,
                                             color: Colors.black
                                         ),
                                       )
@@ -397,8 +397,10 @@ class _StoryViewState extends State<StoryView> {
                                         ),
                                         borderRadius: BorderRadius.circular(100),
                                       ),
-                                      height: MediaQuery.of(context).size.height*0.08,
-                                      width: MediaQuery.of(context).size.width*0.17,
+                                      height:50,
+                                      width:50,
+                                      // height: MediaQuery.of(context).size.height*0.08,
+                                      // width: MediaQuery.of(context).size.width*0.17,
                                       child: ClipRRect(
                                         child: Image.asset(
                                           filterImage[index],
@@ -411,9 +413,8 @@ class _StoryViewState extends State<StoryView> {
                                     filterText[index],
                                     textAlign: TextAlign.center,
                                     maxLines: 1,
-                                    style: const TextStyle(
-                                        fontFamily: "YesevaOne",
-                                        fontWeight: FontWeight.bold,
+                                    style: GoogleFonts.suezOne(
+                                        fontWeight: FontWeight.w500,
                                         fontSize: 12,
                                       color: Colors.black
                                     ),

@@ -210,7 +210,7 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                               filterHide ? /// FilterView
                               Container(
                                 color: const Color(0xffEFF0E1),
-                                height: 100,//MediaQuery.of(context).size.height*0.12,
+                                height: 90,//MediaQuery.of(context).size.height*0.12,
                                 width: MediaQuery.of(context).size.width,
                                 padding: const EdgeInsets.only(bottom: 2),
                                 child:
@@ -234,8 +234,8 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                                                   ),
                                                   // height: MediaQuery.of(context).size.height*0.07,
                                                   // width: MediaQuery.of(context).size.width*0.17,
-                                                  height:60,
-                                                  width:60,
+                                                  height:50,
+                                                  width:50,
                                                   child: ClipRRect(
                                                     child: Image.asset(
                                                       filterImage[index],
@@ -379,7 +379,7 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                         Container()
                         : Container(
                           color: const Color(0xffEFF0E1),
-                          height:  100,//MediaQuery.of(context).size.height*0.12,
+                          height:  90,//MediaQuery.of(context).size.height*0.12,
                           width: MediaQuery.of(context).size.width,
                           padding: const EdgeInsets.only(bottom: 2),
                           child:
@@ -401,8 +401,8 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                                               ),
                                               borderRadius: BorderRadius.circular(100),
                                             ),
-                                            height: 60,//MediaQuery.of(context).size.height*0.07,
-                                            width: 60,//MediaQuery.of(context).size.width*0.17,
+                                            height: 50,//MediaQuery.of(context).size.height*0.07,
+                                            width: 50,//MediaQuery.of(context).size.width*0.17,
                                             child: ClipRRect(
                                               child: Image.asset(
                                                 filterImage[index],
