@@ -220,98 +220,114 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
                     height: 2,
                     width: MediaQuery.of(context).size.width,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                    Column(
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        IconButton(
-                            onPressed: (){
-                              likeFunc(widget.result.id!.toString());
-                              },
-                            icon: Icon(
-                              isLiked ? Icons.thumb_up :Icons.thumb_up_alt_outlined,
-                              color: Colors.white,)
-                        ),
-                        const Text(
-                          "Like",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          IconButton(
+                              padding: EdgeInsets.zero,
+                              constraints: BoxConstraints(),
+                              onPressed: (){
+                                likeFunc(widget.result!.id!.toString());
+                                },
+                              icon: Icon(
+                                isLiked ? Icons.thumb_up :Icons.thumb_up_alt_outlined,
+                                color: Colors.white,
+                                size: 20,
+                              )
                           ),
+                          const Text(
+                            "Like",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12
+                            ),
+                          )
+                        ],
+                      ),
+                        Column(
+                          children: [
+                            IconButton(
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints(),
+                                onPressed: (){
+                                  ///Comment view and add new comment from postview
+                                  popUP(context);
+                                },
+                                icon: const Icon(
+                                  Icons.comment,
+                                  color: Colors.white,
+                                  size: 20,
+                                )
+                            ),
+                            const Text("Comment",style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12
+                            ),)
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints(),
+                              onPressed: (){},
+                              icon: const Icon(
+                                Icons.forward,
+                                color: Colors.white,
+                                size: 20,
+                              )
+                            ),
+                            const Text("Share",style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12
+                            ),)
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints(),
+                                onPressed: (){},
+                                icon: const Icon(
+                                  Icons.send,
+                                  color: Colors.white,
+                                  size: 20,
+                                )
+                            ),
+                            const Text("Send",style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12
+                            ),)
+                          ],
+                        ),
+                        Stack(
+                          children: [
+                            Image.asset(
+                                'assets/images/postimages/follow_Rectangle_shape.png',
+                              height: 60,
+                              width: 60,
+                            ),
+                            const Positioned(
+                              left: 10,
+                              right: 0,
+                              top: 22,
+                              bottom: 0,
+                              child: Text(
+                                "follow",
+                                style: TextStyle(
+                                  color: Color(0xffFFC909),
+                                ),
+                              ),
+                            ),
+                          ],
                         )
                       ],
                     ),
-                      Column(
-                        children: [
-                          IconButton(
-                              onPressed: (){
-                                ///Comment view and add new comment from postview
-                                popUP(context);
-                              },
-                              icon: const Icon(
-                                Icons.comment,
-                                color: Colors.white,
-                              )
-                          ),
-                          const Text("Comment",style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12
-                          ),)
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          IconButton(
-                            onPressed: (){},
-                            icon: const Icon(
-                              Icons.forward,
-                              color: Colors.white,
-                            )
-                          ),
-                          const Text("Share",style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12
-                          ),)
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          IconButton(
-                              onPressed: (){},
-                              icon: const Icon(
-                                Icons.send,
-                                color: Colors.white,
-                              )
-                          ),
-                          const Text("Send",style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12
-                          ),)
-                        ],
-                      ),
-                      Stack(
-                        children: [
-                          Image.asset(
-                              'assets/images/postimages/follow_Rectangle_shape.png',
-                            height: 50,
-                            width: 70,
-                          ),
-                          const Positioned(
-                            left: 10,
-                            right: 0,
-                            top: 15,
-                            bottom: 0,
-                            child: Text(
-                              "follow",
-                              style: TextStyle(
-                                color: Color(0xffFFC909),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 5,bottom: 5),
