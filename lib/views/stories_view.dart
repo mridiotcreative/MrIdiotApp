@@ -153,7 +153,7 @@ class _StoryViewState extends State<StoryView> {
                                       popUP(context);
                                     },
                                     child: Container(
-                                      margin: const EdgeInsets.all(10),
+                                      margin: const EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 3),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         border: Border.all(
@@ -163,7 +163,7 @@ class _StoryViewState extends State<StoryView> {
                                         color: Colors.grey
                                       ),
                                       height: MediaQuery.of(context).size.height*0.2,
-                                      width: MediaQuery.of(context).size.width*0.2,
+                                      width: MediaQuery.of(context).size.width*0.22,
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         mainAxisAlignment: MainAxisAlignment.center,
@@ -197,7 +197,7 @@ class _StoryViewState extends State<StoryView> {
                                         });
                                       },
                                       child: Container(
-                                        margin: const EdgeInsets.all(10),
+                                        margin: const EdgeInsets.only(top: 10,bottom: 10,left: 3,right: 3),
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(10),
                                           border: Border.all(
@@ -211,7 +211,7 @@ class _StoryViewState extends State<StoryView> {
                                           )
                                         ),
                                         height: MediaQuery.of(context).size.height*0.2,
-                                        width: MediaQuery.of(context).size.width*0.2,
+                                        width: MediaQuery.of(context).size.width*0.22,
                                         child: const Center(
                                           child: Icon(
                                             Icons.play_circle_outline_sharp,
@@ -242,9 +242,11 @@ class _StoryViewState extends State<StoryView> {
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context,index){
                                   return Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Container(
-                                          margin: const EdgeInsets.only(left:7,top:10,right:7,bottom: 2),
+                                          // margin: const EdgeInsets.only(left:7,top:10,right:7,bottom: 2),
+                                          margin: const EdgeInsets.only(left: 5,right:5,top:10,bottom: 5),
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                                 color: Colors.grey,
@@ -252,8 +254,10 @@ class _StoryViewState extends State<StoryView> {
                                             ),
                                             borderRadius: BorderRadius.circular(100),
                                           ),
-                                          height: MediaQuery.of(context).size.height*0.08,
-                                          width: MediaQuery.of(context).size.width*0.17,
+                                          // height: MediaQuery.of(context).size.height*0.08,
+                                          // width: MediaQuery.of(context).size.width*0.17,
+                                          height:50,
+                                          width:50,
                                           child: ClipRRect(
                                             child: Image.asset(
                                               filterImage[index],
@@ -269,7 +273,7 @@ class _StoryViewState extends State<StoryView> {
                                         style: const TextStyle(
                                             fontFamily: "YesevaOne",
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 12,
+                                            fontSize: 10,
                                             color: Colors.black
                                         ),
                                       )

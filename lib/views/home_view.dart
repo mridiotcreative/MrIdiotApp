@@ -19,6 +19,7 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        toolbarHeight: 45,
         //backgroundColor: Colors.red,
         backgroundColor:const Color(0xffFCC609),
 //        backgroundColor: Color(0xffD2D4DA),
