@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_idiot_app/views/EcommerceView/product_details.dart';
 import '../global_widget.dart';
 import '../photopost_view.dart';
@@ -103,11 +104,13 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                         color: Colors.white,
                       ),
                       margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.all(10),
-                      height: 50,
+                      padding: const EdgeInsets.only(left: 10,right: 10),
+                      height: 45,
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(Icons.menu),
+                          const Icon(Icons.menu_rounded,size: 40,),
                           searchBarView ? Expanded(
                             child: Container(
                               margin: const EdgeInsets.all(0),
@@ -137,14 +140,13 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                               ),
                             ),
                           )
-                              :  const Expanded(
+                              : Expanded(
                                 child: Text(
                                   "Mr Idiot",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 20  ,
-                                      fontFamily: "YesevaOne",
-                                      fontWeight: FontWeight.w900
+                                  style: GoogleFonts.ptSerif(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w700
                                   ),
                                 ),
                               ),
@@ -208,7 +210,7 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                               filterHide ? /// FilterView
                               Container(
                                 color: const Color(0xffEFF0E1),
-                                height: MediaQuery.of(context).size.height*0.12,
+                                height: 100,//MediaQuery.of(context).size.height*0.12,
                                 width: MediaQuery.of(context).size.width,
                                 padding: const EdgeInsets.only(bottom: 2),
                                 child:
@@ -222,7 +224,7 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                                           return Column(
                                             children: [
                                               Container(
-                                                  margin: const EdgeInsets.only(left:7,top:10,right:7,bottom: 2),
+                                                  margin: const EdgeInsets.only(left:5,top:10,right:5,bottom: 2),
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
                                                         color: const Color(0xffA1A7AC),
@@ -230,8 +232,10 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                                                     ),
                                                     borderRadius: BorderRadius.circular(100),
                                                   ),
-                                                  height: MediaQuery.of(context).size.height*0.07,
-                                                  width: MediaQuery.of(context).size.width*0.17,
+                                                  // height: MediaQuery.of(context).size.height*0.07,
+                                                  // width: MediaQuery.of(context).size.width*0.17,
+                                                  height:60,
+                                                  width:60,
                                                   child: ClipRRect(
                                                     child: Image.asset(
                                                       filterImage[index],
@@ -240,7 +244,6 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                                                     borderRadius: BorderRadius.circular(100),
                                                   )
                                               ),
-
                                             ],
                                           );
                                         },
@@ -258,7 +261,8 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                                         ],
                                         style: TextStyle(
                                           color: Colors.black,
-                                          fontWeight: FontWeight.bold
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18
                                         )
                                       ),
                                     ),
@@ -375,7 +379,7 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                         Container()
                         : Container(
                           color: const Color(0xffEFF0E1),
-                          height: MediaQuery.of(context).size.height*0.12,
+                          height:  100,//MediaQuery.of(context).size.height*0.12,
                           width: MediaQuery.of(context).size.width,
                           padding: const EdgeInsets.only(bottom: 2),
                           child:
@@ -389,7 +393,7 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                                     return Column(
                                       children: [
                                         Container(
-                                            margin: const EdgeInsets.only(left:7,top:10,right:7,bottom: 2),
+                                            margin: const EdgeInsets.only(left:5,top:10,right:5,bottom: 2),
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: const Color(0xffA1A7AC),
@@ -397,8 +401,8 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                                               ),
                                               borderRadius: BorderRadius.circular(100),
                                             ),
-                                            height: MediaQuery.of(context).size.height*0.07,
-                                            width: MediaQuery.of(context).size.width*0.17,
+                                            height: 60,//MediaQuery.of(context).size.height*0.07,
+                                            width: 60,//MediaQuery.of(context).size.width*0.17,
                                             child: ClipRRect(
                                               child: Image.asset(
                                                 filterImage[index],
@@ -425,7 +429,8 @@ class _EcommerceHomeViewState extends State<EcommerceHomeView> {
                                     ],
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontWeight: FontWeight.bold
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18
                                     )
                                 ),
                               ),

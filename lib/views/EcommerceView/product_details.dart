@@ -14,6 +14,7 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
+  FToast? fToast;
   CarouselController buttonCarouselController = CarouselController();
 
   final ScrollController _controllerAxis = ScrollController();
@@ -23,6 +24,12 @@ class _ProductDetailState extends State<ProductDetail> {
     "assets/images/ecommerce/b3.png",
   ];
   int tempIndex=1;
+  @override
+  void initState() {
+    super.initState();
+    fToast = FToast();
+    fToast!.init(context);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -222,21 +229,67 @@ class _ProductDetailState extends State<ProductDetail> {
           ],
         ),
       ),
-      bottomNavigationBar:  Container(
+      bottomNavigationBar: Container(
+        height: MediaQuery.of(context).padding.bottom > 10 ? 40 + MediaQuery.of(context).padding.bottom : 50 + MediaQuery.of(context).padding.bottom,
+        color: Colors.grey.withOpacity(0.5),
+        padding: const EdgeInsets.only(top: 1),
         child: Row(
           children: [
             InkWell(
               onTap: (){
-                Fluttertoast.showToast(
-                    msg: "Added To Cart",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Color(0xff2D2D37),
-                    textColor: Colors.white,
-                    fontSize: 16.0,
+                // Fluttertoast.showToast(
+                //     msg: "Added To Cart",
+                //     toastLength: Toast.LENGTH_SHORT,
+                //     gravity: ToastGravity.BOTTOM,
+                //     timeInSecForIosWeb: 1,
+                //     backgroundColor: Color(0xff2D2D37),
+                //     textColor: Colors.white,
+                //     fontSize: 16.0,
+                // );
+                fToast!.showToast(
+                  toastDuration: Duration(milliseconds: 1500),
+                  child: Scaffold(
+                    backgroundColor: Colors.transparent,
+                    body: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.68,
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Color(0xff2D2D37),
+                              borderRadius: BorderRadius.circular(10)
+                            ),
+                            padding: const EdgeInsets.only(top: 5,left: 10,right: 10,bottom: 5),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: const [
+                                ImageIcon(AssetImage("assets/images/toastRightClick.png"),color: Colors.white,size: 25,),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text("Added To Cart",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22.0,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                  textAlign: TextAlign.center,
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  gravity: ToastGravity.CENTER,
                 );
-                Navigator.push(context, MaterialPageRoute(builder: (builder)=> const SubTotal()));
+                //Navigator.push(context, MaterialPageRoute(builder: (builder)=> const SubTotal()));
               },
               child: Container(
               width: MediaQuery.of(context).size.width*0.5,
