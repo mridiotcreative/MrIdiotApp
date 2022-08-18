@@ -231,7 +231,7 @@ class _PhotoPodtViewState extends State<PhotoPodtView> {
                               padding: EdgeInsets.zero,
                               constraints: BoxConstraints(),
                               onPressed: (){
-                                likeFunc(widget.result!.id!.toString());
+                                likeFunc(widget.result.id!.toString());
                                 },
                               icon: Icon(
                                 isLiked ? Icons.thumb_up :Icons.thumb_up_alt_outlined,
