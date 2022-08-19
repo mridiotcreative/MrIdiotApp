@@ -24,7 +24,7 @@ class _AddressState extends State<Address> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  color:const Color(0xff2D2D37),
+                  color:  Color(0xff2D2D37),
                   child: Row(
                     children: [
                       Expanded(
@@ -38,11 +38,13 @@ class _AddressState extends State<Address> {
                             color: Colors.white,
                           ),
                           margin: const EdgeInsets.all(10),
-                          padding: const EdgeInsets.all(10),
-                          height: 50,
+                          padding: const EdgeInsets.only(left: 10,right: 10),
+                          height: 45,
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.menu),
+                              const Icon(Icons.menu_rounded,size: 40,),
                               searchBarView ? Expanded(
                                 child: Container(
                                   margin: const EdgeInsets.all(0),
@@ -72,11 +74,12 @@ class _AddressState extends State<Address> {
                                   ),
                                 ),
                               )
-                                  :  const Expanded(
-                                child: SizedBox(),
+                                  : Expanded(
+                                child: Text(
+                                  "",
+                                ),
                               ),
                               IconButton(
-                                  padding: EdgeInsets.all(0),
                                   onPressed: (){
                                     setState(() {
                                       searchBarView ? searchBarView = false : searchBarView = true;

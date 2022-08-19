@@ -246,6 +246,7 @@ class _ProductDetailState extends State<ProductDetail> {
                 //     textColor: Colors.white,
                 //     fontSize: 16.0,
                 // );
+                Navigator.push(context, MaterialPageRoute(builder: (builder)=> const SubTotal()));
                 fToast!.showToast(
                   toastDuration: Duration(milliseconds: 1500),
                   child: Scaffold(
@@ -289,7 +290,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   ),
                   gravity: ToastGravity.CENTER,
                 );
-                //Navigator.push(context, MaterialPageRoute(builder: (builder)=> const SubTotal()));
+
               },
               child: Container(
               width: MediaQuery.of(context).size.width*0.5,

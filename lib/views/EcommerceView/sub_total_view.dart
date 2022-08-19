@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../global_widget.dart';
 import '../profile_view.dart';
@@ -20,88 +21,93 @@ class _SubTotalState extends State<SubTotal> {
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              color:const Color(0xff2D2D37),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 2,
-                            color: Colors.yellow
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 2,
+                          color: Colors.yellow
                       ),
-                      margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.all(10),
-                      height: 50,
-                      child: Row(
-                        children: [
-                          const Icon(Icons.menu),
-                          searchBarView ? Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.all(0),
-                              padding: const EdgeInsets.all(0),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      color: Colors.transparent,
-                                      //color: Colors.red,
-                                      child: const TextField(
-                                        decoration: InputDecoration(
-                                          hintText: 'Search...',
-                                          prefixIcon: Icon(Icons.search),
-                                          //suffixIcon: Icon(Icons.camera_alt)
-                                        ),
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                    ),
+                    margin: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(left: 10,right: 10),
+                    height: 45,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.menu_rounded,size: 40,),
+                        searchBarView ? Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.all(0),
+                            padding: const EdgeInsets.all(0),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    color: Colors.transparent,
+                                    //color: Colors.red,
+                                    child: const TextField(
+                                      decoration: InputDecoration(
+                                        hintText: 'Search...',
+                                        prefixIcon: Icon(Icons.search),
+                                        //suffixIcon: Icon(Icons.camera_alt)
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    margin: const EdgeInsets.only(bottom: 0),
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 1,
-                                    color: Colors.black,
-                                  )
-                                ],
-                              ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(bottom: 0),
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 1,
+                                  color: Colors.black,
+                                )
+                              ],
                             ),
-                          )
-                              :  const Expanded(
-                            child: SizedBox(),
                           ),
-                          IconButton(
-                              padding: EdgeInsets.all(0),
-                              onPressed: (){
-                                setState(() {
-                                  searchBarView ? searchBarView = false : searchBarView = true;
+                        )
+                            : Expanded(
+                          child: Text(
+                            "",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.ptSerif(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w700
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                            onPressed: (){
+                              setState(() {
+                                searchBarView ? searchBarView = false : searchBarView = true;
 
-                                });
-                              },
-                              icon: Icon(searchBarView ? Icons.cancel :Icons.search))
-                        ],
-                      ),
+                              });
+                            },
+                            icon: Icon(searchBarView ? Icons.cancel :Icons.search))
+                      ],
                     ),
                   ),
-                  InkWell(
-                    onTap: (){
-                      setState(() {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileView()),);
-                      });
-                    },
-                    child: ClipOval(
-                      child: Image.asset(
-                        "assets/images/home/profile.png",
-                        height: 40,
-                        width: 40,
-                      ),
+                ),
+                InkWell(
+                  onTap: (){
+                    setState(() {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileView()),);
+                    });
+                  },
+                  child: ClipOval(
+                    child: Image.asset(
+                      "assets/images/home/profile.png",
+                      height: 40,
+                      width: 40,
                     ),
                   ),
-                  const SizedBox(width: 10,)
-                ],
-              ),
+                ),
+                const SizedBox(width: 10,)
+              ],
             ),
             Container(
               color: Colors.white,

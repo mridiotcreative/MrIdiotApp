@@ -108,18 +108,22 @@ class _ScreenOtpState extends State<ScreenOtp> {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeView()),);
                       },
                       child: Container(
+                        height: 45,
+                        width: 120,
                         margin: const EdgeInsets.only(top: 15),
                         padding: const EdgeInsets.only(top: 0,bottom: 0,right: 22,left: 22),
                         decoration: BoxDecoration(
                           color: const Color(0xffFFC909),
                           borderRadius: BorderRadius.circular(7),
                         ),
-                        child: Text(
-                          "NEXT",
-                          style: GoogleFonts.suwannaphum(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xff000000),
-                              fontSize: 25
+                        child: Center(
+                          child: Text(
+                            "NEXT",
+                            style: GoogleFonts.suwannaphum(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff000000),
+                                fontSize: 25
+                            ),
                           ),
                         ),
                       ),
