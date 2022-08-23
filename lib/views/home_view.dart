@@ -68,7 +68,7 @@ class _HomeViewState extends State<HomeView> {
           style: TextStyle(
               fontSize: 25,
               fontFamily: "YesevaOne",
-              fontWeight: FontWeight.w900
+              fontWeight: FontWeight.w500
           ),
         ),
         actions: [

@@ -173,7 +173,7 @@ class _StoryViewState extends State<StoryView> {
                                           Icon(
                                             Icons.add,
                                             color: Colors.black,
-                                            size: 40,
+                                            size: 50,
                                           ),
                                           Text(
                                             "CREATE STORY",

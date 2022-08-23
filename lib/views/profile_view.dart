@@ -299,7 +299,7 @@ class _ProfileViewState extends State<ProfileView> {
               ///filter
               Container(
                 margin: const EdgeInsets.only(top: 0),
-                height: MediaQuery.of(context).size.height*0.13,
+                height: MediaQuery.of(context).size.height*0.10,
                 child: ListView.builder(
                   itemCount: filterImage.length,
                   scrollDirection: Axis.horizontal,
@@ -320,8 +320,8 @@ class _ProfileViewState extends State<ProfileView> {
                               fit: BoxFit.contain
                             )
                           ),
-                          height: 70,//MediaQuery.of(context).size.height*0.085,
-                          width: 70,//MediaQuery.of(context).size.width*0.16,
+                          height: 51,//MediaQuery.of(context).size.height*0.085,
+                          width: 51,//MediaQuery.of(context).size.width*0.16,
                           child: const Icon(Icons.add,color: Colors.black,size: 40,),
                         ): const SizedBox(),
                         Container(
@@ -333,8 +333,8 @@ class _ProfileViewState extends State<ProfileView> {
                               ),
                               borderRadius: BorderRadius.circular(100),
                             ),
-                            height: 70,//MediaQuery.of(context).size.height*0.085,
-                            width: 70,//MediaQuery.of(context).size.width*0.16,
+                            height: 51,//MediaQuery.of(context).size.height*0.085,
+                            width: 51,//MediaQuery.of(context).size.width*0.16,
                             child: ClipRRect(
                               child: Image.asset(
                                 filterImage[index],
